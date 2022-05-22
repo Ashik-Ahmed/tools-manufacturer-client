@@ -49,6 +49,7 @@ const MyOrders = () => {
                             <th>Total Price</th>
                             <th>Status</th>
                             <th>Action</th>
+                            <th>Payment Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -78,9 +79,12 @@ const MyOrders = () => {
                                         <td>{tool.quantity * tool.price}</td>
                                         <td>Pending</td>
                                         <th className='flex-col gap-x-2'>
-                                            <button onClick={() => handleProductDelete(tool._id)} class="btn bg-red-800 btn-xs">Cancel</button>
+                                            {!tool.paid && <button onClick={() => handleProductDelete(tool._id)} class="btn bg-red-800 btn-xs">Cancel</button>}
+
+                                        </th>
+                                        <th className='flex-col gap-x-2'>
                                             {!tool.paid && <Link to={`/dashboard/payment/${tool._id}`} class="btn bg-success btn-xs">Pay Now</Link>}
-                                            {tool.paid && <span class="btn bg-success btn-xs">Paid</span>}
+                                            {tool.paid && <div><span class="bg-blue-500 text-white px-1">Paid</span> <br /><small className='text-xs'>TxnID: <span className='text-red-400'>{tool.transactionId}</span> </small></div>}
                                         </th>
                                     </tr>
                                 </>

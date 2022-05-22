@@ -5,6 +5,7 @@ import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import signup from '../../Assets/images/signup.jpg'
 import auth from '../../firebase.init';
+import useToken from '../../hooks/useToken';
 import Loading from '../Shared/Loading';
 
 const Signup = () => {
@@ -26,6 +27,8 @@ const Signup = () => {
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
+    const [token] = useToken(user);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -53,7 +56,6 @@ const Signup = () => {
 
     let passMatcher;
     const onSubmit = async (data) => {
-        console.log(data);
         if (data.password === data.confirmPassword) {
             await createUserWithEmailAndPassword(data.email, data.password);
             await updateProfile({ displayName: data.name });
