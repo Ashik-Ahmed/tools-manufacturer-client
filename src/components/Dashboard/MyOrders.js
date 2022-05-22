@@ -1,17 +1,39 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const MyOrders = () => {
 
-    const [products, setProducts] = useState([]);
+    const [tools, setTools] = useState([]);
 
     // getting products from db 
     useEffect(() => {
         fetch('http://localhost:5000/tools')
             .then(res => res.json())
-            .then(data => setProducts(data))
+            .then(data => setTools(data))
     }, [])
 
-    console.log(products);
+    // delete a product from db and ui 
+    const handleProductDelete = (id) => {
+
+        const proceed = window.confirm("Are you sure??");
+        if (proceed) {
+            const url = `http://localhost:5000/tool/${id}`;
+
+            fetch(url, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount > 0) {
+                        const remaining = tools.filter(tool => tool._id !== id);
+                        setTools(remaining);
+                    }
+                })
+
+        }
+
+    }
+
 
     return (
         <div>
@@ -31,33 +53,34 @@ const MyOrders = () => {
                     </thead>
                     <tbody>
                         {
-                            products.map(product => {
+                            tools.map(tool => {
                                 return <>
                                     <tr>
                                         <td>
                                             <div class="flex items-center space-x-3">
                                                 <div class="avatar">
                                                     <div class="mask mask-squircle w-12 h-12">
-                                                        <img src={product.photo} alt="Avatar Tailwind CSS Component" />
+                                                        <img src={tool.photo} alt="Avatar Tailwind CSS Component" />
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <div class="font-bold">{product.name}</div>
+                                                    <div class="font-bold">{tool.name}</div>
                                                     {/* <div class="text-sm opacity-50">United States</div> */}
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            {product.price}
+                                            {tool.price}
                                             <br />
                                             {/* <span class="badge badge-ghost badge-sm">Desktop Support Technician</span> */}
                                         </td>
-                                        <td>{product.quantity}</td>
-                                        <td>{product.quantity * product.price}</td>
+                                        <td>{tool.quantity}</td>
+                                        <td>{tool.quantity * tool.price}</td>
                                         <td>Pending</td>
                                         <th className='flex-col gap-x-2'>
-                                            <button class="btn bg-red-800 btn-xs">Cancel</button>
-                                            <button class="btn bg-success btn-xs">Pay Now</button>
+                                            <button onClick={() => handleProductDelete(tool._id)} class="btn bg-red-800 btn-xs">Cancel</button>
+                                            {!tool.paid && <Link to={`/dashboard/payment/${tool._id}`} class="btn bg-success btn-xs">Pay Now</Link>}
+                                            {tool.paid && <span class="btn bg-success btn-xs">Paid</span>}
                                         </th>
                                     </tr>
                                 </>
@@ -68,7 +91,7 @@ const MyOrders = () => {
                 </table>
             </div>
 
-        </div>
+        </div >
     );
 };
 
