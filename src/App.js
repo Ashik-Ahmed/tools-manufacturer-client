@@ -12,6 +12,7 @@ import MyOrders from './components/Dashboard/MyOrders';
 import AddReview from './components/Dashboard/AddReview';
 import Payment from './components/Dashboard/Payment';
 import MyProfile from './components/Dashboard/MyProfile';
+import NotFound from './components/NotFound/NotFound';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path='payment/:orderId' element={<Payment />}></Route>
 
         </Route>
+        <Route path='*' element={<NotFound />}></Route>
       </Routes>
 
       <ToastContainer />
