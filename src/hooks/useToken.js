@@ -4,8 +4,13 @@ const useToken = user => {
     const [token, setToken] = useState('');
     useEffect(() => {
         const email = user?.user?.email;
-        const name = user?.user?.displayName;
-        const currentUser = { name, email };
+        // const name = user?.user?.displayName;
+        // const photo = user?.user?.photoURL;
+        const currentUser = {
+            email: email,
+        };
+
+        // console.log('useToken info', email);
 
         if (email) {
             fetch(`http://localhost:5000/user/${email}`, {

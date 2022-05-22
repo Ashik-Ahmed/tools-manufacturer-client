@@ -27,7 +27,7 @@ const Signup = () => {
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
-
+    console.log(user);
     const [token] = useToken(user);
 
     const navigate = useNavigate();
@@ -35,7 +35,7 @@ const Signup = () => {
     let from = location.state?.from?.pathname || "/";
     // handle successful and failed registration notification and redirect
     useEffect(() => {
-        if (user) {
+        if (token) {
             toast.success("Account created successfully");
             navigate(from, { replace: true });
         }
@@ -52,7 +52,7 @@ const Signup = () => {
                     break;
             }
         }
-    }, [user, error])
+    }, [token, error])
 
     let passMatcher;
     const onSubmit = async (data) => {

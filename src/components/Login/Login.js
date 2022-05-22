@@ -7,6 +7,7 @@ import auth from '../../firebase.init';
 import { useAuthState, useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import Loading from '../Shared/Loading';
+import useToken from '../../hooks/useToken';
 
 
 
@@ -23,6 +24,7 @@ const Login = () => {
         emailError,
     ] = useSignInWithEmailAndPassword(auth);
 
+    const [token] = useToken(googleUser);
 
     // getting the redirect location from Require Auth 
     const location = useLocation();
