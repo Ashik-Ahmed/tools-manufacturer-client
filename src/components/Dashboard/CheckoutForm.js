@@ -11,7 +11,7 @@ const CheckoutForm = ({ order, product }) => {
     const [transactionId, setTransactionId] = useState('');
     const [clientSecret, setClientSecret] = useState('');
 
-    const { _id, productId, quantity, email } = order;
+    const { _id, productId, quantity, customerEmail } = order;
 
     useEffect(() => {
         fetch('http://localhost:5000/create-payment-intent', {
@@ -20,7 +20,7 @@ const CheckoutForm = ({ order, product }) => {
                 "content-type": "application/json"
             },
             body: JSON.stringify({
-                price: product.price,
+                price: product?.price,
                 quantity: quantity,
             }),
         })
@@ -32,7 +32,7 @@ const CheckoutForm = ({ order, product }) => {
 
             })
 
-    }, [product])
+    }, [])
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -65,7 +65,7 @@ const CheckoutForm = ({ order, product }) => {
                 payment_method: {
                     card: card,
                     billing_details: {
-                        name: email,
+                        name: customerEmail,
                     },
                 },
             },

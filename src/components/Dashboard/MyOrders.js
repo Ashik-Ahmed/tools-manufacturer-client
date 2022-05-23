@@ -25,6 +25,8 @@ const MyOrders = () => {
 
     }, [user])
 
+    console.log(orders);
+
     // delete a product from db and ui 
     const handleCancelOrder = (id) => {
 
