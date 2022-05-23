@@ -1,23 +1,38 @@
 import React, { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
+import auth from '../../firebase.init';
 
 const MyOrders = () => {
 
-    const [tools, setTools] = useState([]);
+    const [orders, setOrders] = useState([]);
+    const [user] = useAuthState(auth);
 
-    // getting products from db 
+    //get products by user email
     useEffect(() => {
-        fetch('http://localhost:5000/tools')
+        const email = user.email;
+        const url = `http://localhost:5000/myOrder?email=${email}`;
+
+        fetch(url,
+            //     {
+            //     headers: {
+            //         authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            //     }
+            // }
+        )
             .then(res => res.json())
-            .then(data => setTools(data))
-    }, [])
+            .then(data => setOrders(data))
+
+    }, [user])
+
+    console.log(orders);
 
     // delete a product from db and ui 
-    const handleProductDelete = (id) => {
+    const handleCancelOrder = (id) => {
 
         const proceed = window.confirm("Are you sure??");
         if (proceed) {
-            const url = `http://localhost:5000/tool/${id}`;
+            const url = `http://localhost:5000/order/${id}`;
 
             fetch(url, {
                 method: 'DELETE'
@@ -25,8 +40,8 @@ const MyOrders = () => {
                 .then(res => res.json())
                 .then(data => {
                     if (data.deletedCount > 0) {
-                        const remaining = tools.filter(tool => tool._id !== id);
-                        setTools(remaining);
+                        const remaining = orders.filter(tool => tool._id !== id);
+                        setOrders(remaining);
                     }
                 })
 
@@ -54,7 +69,7 @@ const MyOrders = () => {
                     </thead>
                     <tbody>
                         {
-                            tools.map(tool => {
+                            orders?.map(tool => {
                                 return <>
                                     <tr>
                                         <td>
@@ -79,7 +94,7 @@ const MyOrders = () => {
                                         <td>{tool.quantity * tool.price}</td>
                                         <td>Pending</td>
                                         <th className='flex-col gap-x-2'>
-                                            {!tool.paid && <button onClick={() => handleProductDelete(tool._id)} class="btn bg-red-800 btn-xs">Cancel</button>}
+                                            {!tool.paid && <button onClick={() => handleCancelOrder(tool._id)} class="btn bg-red-800 btn-xs">Cancel</button>}
 
                                         </th>
                                         <th className='flex-col gap-x-2'>
