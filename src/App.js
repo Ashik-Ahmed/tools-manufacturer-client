@@ -14,6 +14,8 @@ import Payment from './components/Dashboard/Payment';
 import MyProfile from './components/Dashboard/MyProfile';
 import NotFound from './components/NotFound/NotFound';
 import UpdateProduct from './components/UpdateProduct/UpdateProduct';
+import Footer from './components/Shared/Footer/Footer';
+import ConfirmOrder from './components/ConfirmOrder/ConfirmOrder';
 
 function App() {
   return (
@@ -27,6 +29,13 @@ function App() {
           element={
             <RequireAuth>
               <UpdateProduct />
+            </RequireAuth>
+          }
+        ></Route>
+        <Route path='/confirm-order/:id'
+          element={
+            <RequireAuth>
+              <ConfirmOrder />
             </RequireAuth>
           }
         ></Route>
@@ -44,6 +53,8 @@ function App() {
         </Route>
         <Route path='*' element={<NotFound />}></Route>
       </Routes>
+
+      <Footer />
 
       <ToastContainer />
 

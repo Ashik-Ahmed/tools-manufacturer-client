@@ -75,7 +75,7 @@ const UpdateProduct = () => {
 
 
     return (
-        <div className='mt-16'>
+        <div className='mt-16 h-screen'>
 
             <div>
                 <div className='text-left mx-auto flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl '>
