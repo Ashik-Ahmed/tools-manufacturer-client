@@ -13,6 +13,7 @@ import AddReview from './components/Dashboard/AddReview';
 import Payment from './components/Dashboard/Payment';
 import MyProfile from './components/Dashboard/MyProfile';
 import NotFound from './components/NotFound/NotFound';
+import UpdateProduct from './components/UpdateProduct/UpdateProduct';
 
 function App() {
   return (
@@ -22,6 +23,13 @@ function App() {
         <Route path='/' element={<Home />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/signup' element={<Signup />}></Route>
+        <Route path='/inventory/:id'
+          element={
+            <RequireAuth>
+              <UpdateProduct />
+            </RequireAuth>
+          }
+        ></Route>
         <Route path='/dashboard'
           element={
             <RequireAuth>
