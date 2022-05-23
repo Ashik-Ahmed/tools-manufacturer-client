@@ -2,14 +2,17 @@ import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, Outlet } from 'react-router-dom';
 import auth from '../../firebase.init';
+import useDBUser from '../../hooks/useDBUser';
 import Loading from '../Shared/Loading';
 
 const Dashboard = () => {
 
+    const [dbUser] = useDBUser();
     const [authUser, loading] = useAuthState(auth);
-    if (loading) {
+    if (loading || !dbUser) {
         return <Loading />
     }
+
 
 
     return (
@@ -27,9 +30,13 @@ const Dashboard = () => {
                 <label for="my-drawer-2" class="drawer-overlay"></label>
                 <ul class="menu p-4  w-56 bg-base-100 text-base-content">
 
-                    <li><Link to='/dashboard'>My Orders</Link></li>
-                    <li><Link to='add-review'>Add a review</Link></li>
-                    <li><Link to='my-profile'>My Profile</Link></li>
+                    {dbUser.role !== 'admin' &&
+                        <div>
+                            <li><Link to='my-orders'>My Orders</Link></li>
+                            <li><Link to='add-review'>Add a review</Link></li>
+                        </div>
+                    }
+                    <li><Link to='/dashboard'>My Profile</Link></li>
                 </ul>
 
             </div>

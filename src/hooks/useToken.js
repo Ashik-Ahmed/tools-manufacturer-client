@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../firebase.init";
 
 const useToken = user => {
     const [token, setToken] = useState('');
     useEffect(() => {
         const email = user?.user?.email;
-        // const name = user?.user?.displayName;
+        // const name = authUser?.displayName;
         // const photo = user?.user?.photoURL;
         const currentUser = {
             email: email,

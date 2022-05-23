@@ -36,7 +36,7 @@ const MyOrders = () => {
 
 
     return (
-        <div>
+        <div className='mx-4 h-screen'>
             <h2>Your Orders</h2>
 
             <div class="overflow-x-auto w-full">

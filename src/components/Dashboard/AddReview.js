@@ -30,7 +30,7 @@ const AddReview = () => {
     }
 
     return (
-        <div>
+        <div className='h-screen'>
             <h2>Please give us a rating and share your experience with us.</h2>
             <div className='w-3/4 mx-auto mt-8'>
                 <form onSubmit={handleReviewSubmit}>

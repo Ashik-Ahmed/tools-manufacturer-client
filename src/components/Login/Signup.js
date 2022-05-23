@@ -54,7 +54,6 @@ const Signup = () => {
         }
     }, [token, error])
 
-    let passMatcher;
     const onSubmit = async (data) => {
         if (data.password === data.confirmPassword) {
             await createUserWithEmailAndPassword(data.email, data.password);
@@ -198,7 +197,6 @@ const Signup = () => {
                                     <label class="label">
                                         {errors.confirmPassword?.type === 'required' && <span class="label-text-alt text-red-500">{errors.confirmPassword.message}</span>}
                                         {errors.confirmPassword?.type === 'minLength' && <span class="label-text-alt text-red-500">{errors.confirmPassword.message}</span>}
-                                        {passMatcher && <span class="label-text-alt text-red-500">{passMatcher}</span>}
 
                                     </label>
                                     <label class="label">

@@ -1,7 +1,12 @@
 import React from 'react';
 import bannerImage from '../../Assets/images/banner.png'
+import useProducts from '../../hooks/useProducts';
+import Product from '../Product/Product';
 
 const Home = () => {
+
+    const [products] = useProducts();
+
     return (
         <div>
             <div class="hero h-80" style={{ "background-image": `url(${bannerImage})` }
@@ -16,8 +21,13 @@ const Home = () => {
                 </div>
             </div >
 
-            <div class="stats shadow w-full md:w-3/4 mx-auto md:mt-10">
+            <div className='md:flex my-5 gap-x-4 mx-auto justify-center'>
+                {
+                    products.slice(0, 6).map(product => <Product key={product._id} product={product}></Product>)
+                }
+            </div>
 
+            <div class="stats shadow w-full md:w-3/4 mx-auto md:my-10">
                 <div class="stat">
                     <div class="stat-figure text-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
