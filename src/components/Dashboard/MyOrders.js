@@ -25,8 +25,6 @@ const MyOrders = () => {
 
     }, [user])
 
-    console.log(orders);
-
     // delete a product from db and ui 
     const handleCancelOrder = (id) => {
 
@@ -98,7 +96,7 @@ const MyOrders = () => {
 
                                         </th>
                                         <th className='flex-col gap-x-2'>
-                                            {!tool.paid && <Link to={`/dashboard/payment/${tool._id}`} class="btn bg-success btn-xs">Pay Now</Link>}
+                                            {!tool.paid && <div><p className='text-red-600'>Pending </p><Link to={`/dashboard/payment/${tool._id}`} class="btn bg-success btn-xs">Pay Now</Link></div>}
                                             {tool.paid && <div><span class="bg-blue-500 text-white px-1">Paid</span> <br /><small className='text-xs'>TxnID: <span className='text-red-400'>{tool.transactionId}</span> </small></div>}
                                         </th>
                                     </tr>

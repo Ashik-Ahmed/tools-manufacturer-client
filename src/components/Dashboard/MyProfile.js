@@ -49,15 +49,20 @@ const MyProfile = () => {
     }
 
     return (
-        <div class="card md:w-3/4 mx-auto mt-5 h-fit bg-base-100 shadow-xl">
-            <figure class="px-10 pt-10">
-                <img src={userPhoto} alt="Shoes" class="rounded-xl" />
-            </figure>
-            <form onSubmit={handleProfileUpdate}>
+        <div class="card md:w-3/4 mx-auto mt-5 md:flex-row h-fit bg-base-100 shadow-xl">
+            <div>
+                <figure class="px-10 pt-10">
+                    <img src={userPhoto} alt="Shoes" class="rounded-xl" />
+                </figure>
+
+                <div className='text-left ml-8 text-lg  mt-8'>
+                    <h3> <span className='font-bold text-secondary'>Name:</span> {user.displayName}</h3>
+                    <h3> <span className='font-bold text-secondary'>Email:</span> {user.email}</h3>
+                </div>
+            </div>
+            <form className='w-full' onSubmit={handleProfileUpdate}>
                 <div class="card-body my-0 gap-y-0 items-center text-center">
-                    <h2 class="card-title">Update Your Profile</h2>
-                    <h3>Name: {user.displayName}</h3>
-                    <h3>Email: {user.email}</h3>
+                    <h2 class="card-title text-secondary text-3xl mb-5 border-b-4 border-secondary pb-2">Update Your Profile</h2>
                     <div class="form-control w-full max-w-xs">
                         <label class="label">
                             <span class="label-text">Add your education</span>

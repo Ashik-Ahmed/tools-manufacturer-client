@@ -37,6 +37,7 @@ const ConfirmOrder = () => {
         const address = event.target.address.value;
         const order = {
             productId: product._id,
+            quantity: quantity || 1,
             customerName: name,
             customerEmail: email,
             customerNumber: contactNumber,
@@ -108,7 +109,7 @@ const ConfirmOrder = () => {
                                             </div>
                                         </td>
                                         <td>
-                                            <input onBlur={handleQuantity} type="number" name='quantity' placeholder='Quantity' className='border border-black w-1/4' />
+                                            <input onBlur={handleQuantity} type="number" name='quantity' placeholder='1' className='border border-black w-1/4' />
 
                                         </td>
                                         <td>{product.price}</td>

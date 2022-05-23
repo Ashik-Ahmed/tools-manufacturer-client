@@ -1,7 +1,7 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
 
-const CheckoutForm = ({ order }) => {
+const CheckoutForm = ({ order, product }) => {
 
     const stripe = useStripe();
     const elements = useElements()
@@ -11,7 +11,7 @@ const CheckoutForm = ({ order }) => {
     const [transactionId, setTransactionId] = useState('');
     const [clientSecret, setClientSecret] = useState('');
 
-    const { _id, price, quantity, email } = order;
+    const { _id, productId, quantity, email } = order;
 
     useEffect(() => {
         fetch('http://localhost:5000/create-payment-intent', {
@@ -19,7 +19,10 @@ const CheckoutForm = ({ order }) => {
             headers: {
                 "content-type": "application/json"
             },
-            body: JSON.stringify({ price, quantity }),
+            body: JSON.stringify({
+                price: product.price,
+                quantity: quantity,
+            }),
         })
             .then(res => res.json())
             .then(data => {
@@ -29,7 +32,7 @@ const CheckoutForm = ({ order }) => {
 
             })
 
-    }, [])
+    }, [product])
 
     const handleSubmit = async (event) => {
         event.preventDefault();
