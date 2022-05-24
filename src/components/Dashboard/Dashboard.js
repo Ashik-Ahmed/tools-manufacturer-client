@@ -37,6 +37,14 @@ const Dashboard = () => {
                             <li><Link to='add-review'>Add a review</Link></li>
                         </div>
                     }
+                    {dbUser.role === 'admin' &&
+                        <div>
+                            <li><Link to='my-orders'>Manage Users</Link></li>
+                            <li><Link to='add-review'>Add a Product</Link></li>
+                            <li><Link to='add-review'>Manage All Products</Link></li>
+                            <li><Link to='add-review'>Manage All Orders</Link></li>
+                        </div>
+                    }
                 </ul>
 
             </div>

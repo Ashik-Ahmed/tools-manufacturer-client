@@ -16,6 +16,7 @@ import NotFound from './components/NotFound/NotFound';
 import UpdateProduct from './components/UpdateProduct/UpdateProduct';
 import Footer from './components/Shared/Footer/Footer';
 import ConfirmOrder from './components/ConfirmOrder/ConfirmOrder';
+import Blogs from './components/Blogs/Blogs';
 
 function App() {
   return (
@@ -25,26 +26,24 @@ function App() {
         <Route path='/' element={<Home />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/signup' element={<Signup />}></Route>
-        <Route path='/inventory/:id'
-          element={
-            <RequireAuth>
-              <UpdateProduct />
-            </RequireAuth>
-          }
+        <Route path='/blogs' element={<Blogs />}></Route>
+        <Route path='/inventory/:id' element={
+          <RequireAuth>
+            <UpdateProduct />
+          </RequireAuth>
+        }
         ></Route>
-        <Route path='/confirm-order/:id'
-          element={
-            <RequireAuth>
-              <ConfirmOrder />
-            </RequireAuth>
-          }
+        <Route path='/confirm-order/:id' element={
+          <RequireAuth>
+            <ConfirmOrder />
+          </RequireAuth>
+        }
         ></Route>
-        <Route path='/dashboard'
-          element={
-            <RequireAuth>
-              <Dashboard />
-            </RequireAuth>
-          }>
+        <Route path='/dashboard' element={
+          <RequireAuth>
+            <Dashboard />
+          </RequireAuth>
+        }>
           <Route path='my-orders' element={<MyOrders />}></Route>
           <Route path='add-review' element={<AddReview />}></Route>
           <Route index element={<MyProfile />}></Route>

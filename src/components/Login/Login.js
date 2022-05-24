@@ -24,7 +24,7 @@ const Login = () => {
         emailError,
     ] = useSignInWithEmailAndPassword(auth);
 
-    const [token] = useToken(googleUser);
+    const [token] = useToken(emailUser || googleUser);
 
     // getting the redirect location from Require Auth 
     const location = useLocation();

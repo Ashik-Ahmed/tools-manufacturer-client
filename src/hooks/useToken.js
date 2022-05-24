@@ -6,13 +6,9 @@ const useToken = user => {
     const [token, setToken] = useState('');
     useEffect(() => {
         const email = user?.user?.email;
-        // const name = authUser?.displayName;
-        // const photo = user?.user?.photoURL;
         const currentUser = {
             email: email,
         };
-
-        // console.log('useToken info', email);
 
         if (email) {
             fetch(`http://localhost:5000/user/${email}`, {
@@ -25,6 +21,9 @@ const useToken = user => {
                 .then(res => res.json())
                 .then(data => {
                     console.log('data from useToken', data);
+                    const accessToken = data.token;
+                    localStorage.setItem('accessToken', accessToken);
+                    setToken(accessToken);
                 })
         }
 
