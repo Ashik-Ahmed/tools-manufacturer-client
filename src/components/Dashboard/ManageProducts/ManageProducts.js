@@ -1,11 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useQuery } from 'react-query';
 import useProducts from '../../../hooks/useProducts';
 import Loading from '../../Shared/Loading';
+import ProductDeleteModal from './ProductDeleteModal';
 import ProductRow from './ProductRow';
 
 const ManageProducts = () => {
 
     const [products, isLoading, refetch] = useProducts();
+    const [modal, setModal] = useState(null)
+
+
+    const handleProductDelete = (id) => {
+
+        const url = `http://localhost:5000/tool/${id}`;
+
+        fetch(url, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                refetch();
+            })
+    }
 
     if (isLoading) {
         return <Loading />
@@ -27,7 +44,10 @@ const ManageProducts = () => {
                     </thead>
                     <tbody>
                         {
-                            products.length > 0 && products?.map(product => <ProductRow key={product._id} product={product} refetch={refetch}></ProductRow>)
+                            products.length > 0 && products?.map(product => <ProductRow key={product._id} product={product} setModal={setModal} refetch={refetch}></ProductRow>)
+                        }
+                        {
+                            modal && <ProductDeleteModal product={modal} handleProductDelete={handleProductDelete}></ProductDeleteModal>
                         }
                     </tbody>
 

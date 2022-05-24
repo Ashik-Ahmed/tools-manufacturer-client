@@ -6,7 +6,6 @@ const UpdateProduct = () => {
     const { id } = useParams();
 
     const [product] = useSingleProduct(id);
-    console.log(product)
 
     // //load the specific product by id
     // useEffect(() => {

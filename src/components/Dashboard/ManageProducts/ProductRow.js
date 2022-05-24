@@ -1,11 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ProductRow = ({ product }) => {
+const ProductRow = ({ product, setModal }) => {
 
-    const handleProductDelete = (id) => {
-        console.log('deleted', id)
-    }
 
     return (
         <tr className='hover:bg-red-200'>
@@ -16,7 +13,6 @@ const ProductRow = ({ product }) => {
                             <img src={product.photo} alt="Avatar Tailwind CSS Component" />
                         </div>
                     </div>
-
                 </div>
             </td>
             <td>
@@ -29,11 +25,10 @@ const ProductRow = ({ product }) => {
                 <div><p>{product.quantity}</p></div>
             </td>
             <th>
-                <div className='flex gap-x-3'>
-                    <Link to={`/inventory/${product._id}`} class="btn bg-green-600 btn-xs">Update</Link>
-                    <button onClick={() => handleProductDelete(product._id)} class="btn bg-red-600 btn-xs">Delete</button>
 
-                </div>
+                <Link to={`/inventory/${product._id}`} class="btn bg-green-600 btn-sm">Update</Link>
+
+                <label onClick={() => setModal(product)} for="my-modal-6" class="btn bg-red-600 btn-sm ml-3">Delete</label>
             </th>
         </tr >
     );
