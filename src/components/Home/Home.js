@@ -6,9 +6,9 @@ import Loading from '../Shared/Loading';
 
 const Home = () => {
 
-    const [products] = useProducts();
+    const [products, isLoading] = useProducts();
 
-    if (!products.length) {
+    if (isLoading) {
         return <Loading />
     }
 
@@ -28,7 +28,7 @@ const Home = () => {
 
             <div className='md:flex my-5 gap-x-4 mx-auto justify-center'>
                 {
-                    products.slice(0, 6).map(product => <Product key={product._id} product={product}></Product>)
+                    products?.slice(0, 6).map(product => <Product key={product._id} product={product}></Product>)
                 }
             </div>
 

@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import userVector from '../../Assets/images/user.png'
-import { async } from '@firebase/util';
 import useDBUser from '../../hooks/useDBUser';
 
 const MyProfile = () => {
 
-    const [dbUser] = useDBUser();
-
     const [user] = useAuthState(auth);
+    const [dbUser] = useDBUser(user);
     const userPhoto = user.photoURL || userVector;
-
 
     const handleProfileUpdate = async (event) => {
         event.preventDefault();
@@ -19,14 +15,15 @@ const MyProfile = () => {
         const address = event.target.address.value || dbUser.address;
         const contact = event.target.contact.value || dbUser.contact;
         const linkedin = event.target.linkedin.value || dbUser.linkedin;
-        console.log("Update clicked", education, address, contact, linkedin);
+        const photo = event.target.photo.value;
         // await updateProfile({ education, address, contact, linkedin });
 
         const updatedUser = {
             education,
             address,
             contact,
-            linkedin
+            linkedin,
+            photo,
         }
 
         if (user.email) {
@@ -52,7 +49,7 @@ const MyProfile = () => {
         <div class="card md:w-3/4 mx-auto mt-5 md:flex-row h-fit bg-base-100 shadow-xl">
             <div>
                 <figure class="px-10 pt-10">
-                    <img src={userPhoto} alt="Shoes" class="rounded-xl" />
+                    <img src={dbUser.photo || userPhoto} alt="Shoes" class="rounded-xl" />
                 </figure>
 
                 <div className='text-left ml-8 text-lg  mt-8'>
@@ -86,6 +83,12 @@ const MyProfile = () => {
                             <span class="label-text">Linkedin Profile</span>
                         </label>
                         <input type="text" name='linkedin' placeholder={dbUser?.linkedin || 'No Linked profile available'} class="input input-bordered w-full max-w-xs" />
+                    </div>
+                    <div class="form-control w-full max-w-xs">
+                        <label class="label">
+                            <span class="label-text">Profile Picture</span>
+                        </label>
+                        <input type="text" name='photo' placeholder='Profile Picture link' class="input input-bordered w-full max-w-xs" />
                     </div>
                     <div class="card-actions mt-5">
                         <button type='submit' class="btn btn-primary">Update</button>

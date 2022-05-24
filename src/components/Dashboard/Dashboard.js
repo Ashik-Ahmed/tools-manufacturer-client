@@ -7,8 +7,8 @@ import Loading from '../Shared/Loading';
 
 const Dashboard = () => {
 
-    const [dbUser] = useDBUser();
     const [authUser, loading] = useAuthState(auth);
+    const [dbUser] = useDBUser(authUser);
     if (loading || !dbUser) {
         return <Loading />
     }
@@ -39,10 +39,10 @@ const Dashboard = () => {
                     }
                     {dbUser.role === 'admin' &&
                         <div>
-                            <li><Link to='my-orders'>Manage Users</Link></li>
-                            <li><Link to='add-review'>Add a Product</Link></li>
-                            <li><Link to='add-review'>Manage All Products</Link></li>
-                            <li><Link to='add-review'>Manage All Orders</Link></li>
+                            <li><Link to='manage-users'>Manage Users</Link></li>
+                            <li><Link to='add-product'>Add a Product</Link></li>
+                            <li><Link to='manage-products'>Manage All Products</Link></li>
+                            <li><Link to='manage-orders'>Manage All Orders</Link></li>
                         </div>
                     }
                 </ul>

@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react"
+import { useQuery } from "react-query";
 
 const useProducts = () => {
-    const [products, setProducts] = useState([]);
 
     // getting products from db 
-    useEffect(() => {
-        fetch('http://localhost:5000/tools')
-            .then(res => res.json())
-            .then(data => setProducts(data))
-    }, [])
+    const { data: products, isLoading, refetch } = useQuery('products', () => fetch('http://localhost:5000/tools', {
+        method: 'GET',
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }).then(res => res.json()))
 
-    return [products]
+    return [products, isLoading, refetch]
 }
 
 export default useProducts;

@@ -17,6 +17,10 @@ import UpdateProduct from './components/UpdateProduct/UpdateProduct';
 import Footer from './components/Shared/Footer/Footer';
 import ConfirmOrder from './components/ConfirmOrder/ConfirmOrder';
 import Blogs from './components/Blogs/Blogs';
+import AddProduct from './components/Dashboard/AddProduct';
+import ManageOrders from './ManageOrders';
+import ManageUsers from './components/Dashboard/ManageUsers/ManageUsers';
+import ManageProducts from './components/Dashboard/ManageProducts/ManageProducts';
 
 function App() {
   return (
@@ -48,6 +52,11 @@ function App() {
           <Route path='add-review' element={<AddReview />}></Route>
           <Route index element={<MyProfile />}></Route>
           <Route path='payment/:orderId' element={<Payment />}></Route>
+
+          <Route path='manage-users' element={<ManageUsers />}></Route>
+          <Route path='add-product' element={<AddProduct />}></Route>
+          <Route path='manage-products' element={<ManageProducts />}></Route>
+          <Route path='manage-orders' element={<ManageOrders />}></Route>
 
         </Route>
         <Route path='*' element={<NotFound />}></Route>

@@ -6,6 +6,7 @@ const UpdateProduct = () => {
     const { id } = useParams();
 
     const [product] = useSingleProduct(id);
+    console.log(product)
 
     // //load the specific product by id
     // useEffect(() => {
@@ -59,7 +60,7 @@ const UpdateProduct = () => {
         fetch(url, {
             method: 'PUT',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
             },
             body: JSON.stringify(updatedProduct)
         })
