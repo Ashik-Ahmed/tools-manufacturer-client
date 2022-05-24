@@ -1,83 +1,94 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 import { Link, useParams } from 'react-router-dom';
 import useSingleProduct from '../../hooks/useSingleProduct';
+import Loading from '../Shared/Loading';
 
 const UpdateProduct = () => {
     const { id } = useParams();
 
-    const [product] = useSingleProduct(id);
-
-    // //load the specific product by id
-    // useEffect(() => {
-    //     const url = `http://localhost:5000/tools/${id}`;
-    //     fetch(url)
-    //         .then(res => res.json())
-    //         .then(data => setProduct(data))
-    // }, [id, product?.quantity])
-
-    let updatedProduct;
-    let quantity = product?.quantity;
+    const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`http://localhost:5000/tools/${id}`, {
+        method: 'GET',
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }).then(res => res.json()))
 
 
-    const handleDelivered = (action) => {
-        updateProduct('delivered')
-
+    if (isLoading || !product) {
+        return <Loading />
     }
+
+    let quantity = product?.quantity;
 
 
     const handleUpdateQuantity = (e) => {
         e.preventDefault();
         const updatedQuantity = e.target.updatedQuantity.value;
-        updateProduct('updateQuantity', updatedQuantity)
+        updateProduct(updatedQuantity)
         e.target.reset();
 
     }
 
     // function to update product quantity 
-    const updateProduct = (action, q) => {
-        if (action === 'delivered') {
-            if (product.quantity > 0) {
-                quantity = product.quantity - 1;
-                const sold = parseInt(product?.sold || 0) + 1;
-                updatedProduct = { quantity, sold };
-            }
-        }
+    const updateProduct = (inputQuantity) => {
+        if (inputQuantity) {
+            quantity = parseInt(product.quantity) + parseInt(inputQuantity);
 
-        if (action === 'updateQuantity') {
-            if (q) {
-                quantity = product.quantity + parseInt(q);
-                const sold = product.sold;
-                updatedProduct = { quantity, sold };
-            }
-            else {
-                alert('Please enter a number')
-            }
-        }
-
-        //send data to server
-        const url = `http://localhost:5000/tools/${id}`;
-        fetch(url, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify(updatedProduct)
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.modifiedCount > 0) {
-                    // alert('Product Updated Successfully');
-                    // setProduct(updatedProduct);
-                }
+            //send data to server
+            const url = `http://localhost:5000/tool/${id}`;
+            fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json',
+                },
+                body: JSON.stringify({ quantity })
             })
-
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    if (data.modifiedCount > 0) {
+                        alert('Product Updated Successfully');
+                        refetch();
+                    }
+                })
+        }
+        else {
+            alert('Please enter a number')
+        }
     }
 
 
     return (
         <div className='mt-16 h-screen'>
 
-            <div>
+            <div className='flex items-center gap-x-4 justify-end w-3/4 mx-auto'>
+                <Link to='/dashboard/manage-products' className='bg-primary text-white px-2 font-semibold rounded'>Manage All Products</Link>
+            </div>
+            <div class="hero md:w-3/4 mx-auto shadow-2xl">
+                <div class="hero-content flex-col lg:flex-row">
+                    <img src={product.photo} alt='Product' class="max-w-sm rounded-lg" />
+                    <div className='ml-10'>
+                        <h1 class="text-5xl font-bold md:my-4">{product.name}</h1>
+                        <p className='font-bold text-left'>Details: </p>
+                        <p className='font-bold text-left'>Available Qty. : {product.quantity}</p>
+                        <p className='font-bold text-left'>Sold: {product.sold}</p>
+                        <div className='bg-gray-400 mt-8 p-2 inline-block rounded'>
+                            <form className='flex items-center gap-x-2 ' onSubmit={handleUpdateQuantity}>
+                                <input className='rounded p-1' type="number" name='updatedQuantity' placeholder='Quantity' />
+                                <br />
+                                <button className='bg-secondary text-white py-1 px-2 rounded font-semibold'>Restock</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            {/* <div>
+                <div className='flex items-center gap-x-4 justify-between'>
+                    <Link to='/dashboard/manage-products' className='bg-violet-500 text-white px-2 font-semibold rounded'>Manage Inventories</Link>
+                </div>
                 <div className='text-left mx-auto flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl '>
 
 
@@ -89,18 +100,15 @@ const UpdateProduct = () => {
                         <p>Stock: {product.quantity}</p>
                         <p>Sold: {product.sold}</p>
                         <p class="mb-3 text-sm text-gray-700 dark:text-gray-400">{product.description}</p>
-                        <div className='flex items-center gap-x-4 justify-between'>
-                            <button onClick={handleDelivered} className='bg-blue-400 px-2 rounded font-semibold'>Delivered</button>
-                            <Link to='/manage' className='bg-violet-500 text-white px-2 font-semibold rounded'>Manage Inventories</Link>
-                        </div>
+
                     </div>
 
 
                 </div>
 
-            </div>
+            </div> */}
 
-            <div className='mt-2 mb-10'>
+            {/* <div className='mt-2 mb-10'>
                 <div className='bg-blue-400  p-2 inline-block rounded'>
                     <form className='flex items-center gap-x-2 ' onSubmit={handleUpdateQuantity}>
                         <input className='rounded p-1' type="number" name='updatedQuantity' placeholder='Quantity' />
@@ -110,7 +118,7 @@ const UpdateProduct = () => {
                 </div>
 
 
-            </div>
+            </div> */}
         </div>
     );
 };

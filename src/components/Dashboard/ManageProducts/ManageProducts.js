@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useQuery } from 'react-query';
 import useProducts from '../../../hooks/useProducts';
 import Loading from '../../Shared/Loading';
 import ProductDeleteModal from './ProductDeleteModal';
@@ -29,7 +28,7 @@ const ManageProducts = () => {
     }
 
     return (
-        <div>
+        <div className='h-screen'>
             <h2>manage All Products Here</h2>
             <div class="overflow-x-auto m-6">
                 <table class="table w-full  ">
