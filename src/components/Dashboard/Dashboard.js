@@ -9,7 +9,7 @@ const Dashboard = () => {
 
     const [authUser, loading] = useAuthState(auth);
     const [dbUser] = useDBUser(authUser);
-    if (loading || !dbUser.role) {
+    if (loading || !dbUser) {
         return <Loading />
     }
 

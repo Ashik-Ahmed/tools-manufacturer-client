@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import useSingleProduct from '../../hooks/useSingleProduct';
 import Loading from '../Shared/Loading';
@@ -19,9 +20,9 @@ const ConfirmOrder = () => {
 
     const handleCancelOrder = () => {
         setProduct([]);
-        console.log('Canceled');
     }
 
+    // update quantity value by uesr input 
     const handleQuantity = (e) => {
         setQuantity(e.target.value);
 
@@ -44,10 +45,14 @@ const ConfirmOrder = () => {
             customerAddress: address
         }
 
-
-
         if (!quantity) {
-            alert('Please enter Quantity');
+            toast.warn('Please enter Quantity');
+        }
+        else if (parseInt(quantity) < parseInt(product.minimum)) {
+            toast.warn('Order quantity should more that minimum order quantity')
+        }
+        else if (parseInt(quantity) > parseInt(product.quantity)) {
+            toast.warn('Order quantity is more that available quantity')
         }
         else {
 
@@ -61,6 +66,8 @@ const ConfirmOrder = () => {
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);
+                    toast.success('Order Placed Successfully');
+                    event.target.reset();
                 })
 
             console.log('Product Id:', order.productId, 'name: ', name, 'email: ', email, 'number: ', contactNumber, 'address', address, 'Quantity: ', quantity);
@@ -156,6 +163,7 @@ const ConfirmOrder = () => {
                                     </div>
                                 </div>
                                 <input type='submit' className='btn btn-primary mt-5' value='Confirm Order'></input>
+                                {/* <input type='submit' style={(parseInt(quantity) >= parseInt(product.minimum) || parseInt(quantity) <= parseInt(product.quantity)) ? { disabled: 'false' } : { disabled: 'true' }} className='btn btn-primary mt-5' value='Confirm Order' disabled='true'></input> */}
                             </form>
 
                         </div>
@@ -165,7 +173,7 @@ const ConfirmOrder = () => {
                     </div>
             }
 
-        </div>
+        </div >
     );
 };
 

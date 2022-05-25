@@ -8,7 +8,7 @@ const Home = () => {
 
     const [products, isLoading] = useProducts();
 
-    if (isLoading) {
+    if (isLoading || products.length < 1) {
         return <Loading />
     }
 

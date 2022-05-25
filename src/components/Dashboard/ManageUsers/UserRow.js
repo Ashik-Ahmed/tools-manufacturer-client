@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import userImage from '../../../Assets/images/user.png'
 import useDBUser from '../../../hooks/useDBUser';
 
@@ -19,11 +18,6 @@ const UserRow = ({ user, refetch }) => {
                 console.log(data);
                 refetch();
             })
-    }
-
-
-    const handleUserDelete = () => {
-        console.log("Deleted")
     }
 
 
@@ -50,7 +44,6 @@ const UserRow = ({ user, refetch }) => {
                 {dbUser.role === 'admin' ? <p>Already an Admin</p> :
                     <div className='flex gap-x-3'>
                         <button onClick={() => handleMakeAdmin(dbUser._id)} class="btn bg-green-600 btn-xs">Make Admin</button>
-                        <button onClick={() => handleUserDelete()} class="btn bg-red-600 btn-xs">Delete</button>
 
                     </div>}
             </th>

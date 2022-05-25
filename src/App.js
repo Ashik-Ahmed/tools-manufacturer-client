@@ -17,10 +17,11 @@ import UpdateProduct from './components/UpdateProduct/UpdateProduct';
 import Footer from './components/Shared/Footer/Footer';
 import ConfirmOrder from './components/ConfirmOrder/ConfirmOrder';
 import Blogs from './components/Blogs/Blogs';
-import AddProduct from './components/Dashboard/AddProduct';
-import ManageOrders from './ManageOrders';
+import AddProduct from './components/Dashboard/AddProduct/AddProduct';
 import ManageUsers from './components/Dashboard/ManageUsers/ManageUsers';
 import ManageProducts from './components/Dashboard/ManageProducts/ManageProducts';
+import ManageOrders from './components/Dashboard/ManageOrders/ManageOrders';
+import Portfolio from './components/Portfolio/Portfolio';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path='/login' element={<Login />}></Route>
         <Route path='/signup' element={<Signup />}></Route>
         <Route path='/blogs' element={<Blogs />}></Route>
+        <Route path='/portfolio' element={<Portfolio />}></Route>
         <Route path='/inventory/:id' element={
           <RequireAuth>
             <UpdateProduct />

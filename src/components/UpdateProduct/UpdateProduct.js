@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { Link, useParams } from 'react-router-dom';
-import useSingleProduct from '../../hooks/useSingleProduct';
 import Loading from '../Shared/Loading';
 
 const UpdateProduct = () => {
@@ -15,7 +13,7 @@ const UpdateProduct = () => {
     }).then(res => res.json()))
 
 
-    if (isLoading || !product) {
+    if (isLoading || !product.name) {
         return <Loading />
     }
 
@@ -48,8 +46,8 @@ const UpdateProduct = () => {
                 .then(data => {
                     console.log(data)
                     if (data.modifiedCount > 0) {
-                        alert('Product Updated Successfully');
                         refetch();
+                        alert('Product Updated Successfully');
                     }
                 })
         }
@@ -70,7 +68,7 @@ const UpdateProduct = () => {
                     <img src={product.photo} alt='Product' class="max-w-sm rounded-lg" />
                     <div className='ml-10'>
                         <h1 class="text-5xl font-bold md:my-4">{product.name}</h1>
-                        <p className='font-bold text-left'>Details: </p>
+                        <p className='font-bold text-left'>Details: <span className='text-sm font-normal italic'>{product.description}</span></p>
                         <p className='font-bold text-left'>Available Qty. : {product.quantity}</p>
                         <p className='font-bold text-left'>Sold: {product.sold}</p>
                         <div className='bg-gray-400 mt-8 p-2 inline-block rounded'>

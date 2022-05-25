@@ -20,7 +20,7 @@ const CheckoutForm = ({ order, product }) => {
                 "content-type": "application/json"
             },
             body: JSON.stringify({
-                price: product?.price,
+                price: product.price,
                 quantity: quantity,
             }),
         })
@@ -32,7 +32,7 @@ const CheckoutForm = ({ order, product }) => {
 
             })
 
-    }, [])
+    }, [quantity, product])
 
     const handleSubmit = async (event) => {
         event.preventDefault();
