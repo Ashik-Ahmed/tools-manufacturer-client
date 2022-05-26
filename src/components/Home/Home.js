@@ -1,12 +1,22 @@
-import React from 'react';
+import { useQuery } from 'react-query';
 import bannerImage from '../../Assets/images/banner.png'
 import useProducts from '../../hooks/useProducts';
 import Product from '../Product/Product';
+import ReviewCard from '../ReviewCard/ReviewCard';
 import Loading from '../Shared/Loading';
 
 const Home = () => {
 
     const [products, isLoading] = useProducts();
+    // const [reviews, setReviews] = useState([]);
+
+    const { data: reviews } = useQuery('reviews', () => fetch('http://localhost:5000/reviews', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+    }).then(res => res.json()))
 
     if (isLoading || products.length < 1) {
         return <Loading />
@@ -66,27 +76,18 @@ const Home = () => {
 
             </div>
 
-            <div class="carousel w-full">
-                <div id="slide1" class="carousel-item relative w-full">
-                    <img src="https://api.lorem.space/image/car?w=800&h=200&hash=8B7BCDC2" class="w-full" />
-                    <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                        <a href="#slide4" class="btn btn-circle">❮</a>
-                        <a href="#slide2" class="btn btn-circle">❯</a>
-                    </div>
+
+            <div className='mt-8'>
+                <h3 className='text-3xl font-bold pb-2 border-b-4'>What People Say About Us</h3>
+
+                <div className='md:grid grid-cols-2 py-4 md:mx-32'>
+                    {
+                        reviews.map(review => <ReviewCard key={review.id} review={review}></ReviewCard>)
+                    }
                 </div>
-                <div id="slide2" class="carousel-item relative w-full">
-                    <div class="card w-96 bg-base-100 shadow-xl">
-                        <figure><img src="https://api.lorem.space/image/shoes?w=400&h=225" alt="Shoes" /></figure>
-                        <div class="card-body">
-                            <h2 class="card-title">Shoes!</h2>
-                            <p>If a dog chews shoes whose shoes does he choose?</p>
-                            <div class="card-actions justify-end">
-                                <button class="btn btn-primary">Buy Now</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
+
         </div >
     );
 };

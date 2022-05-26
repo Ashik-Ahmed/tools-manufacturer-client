@@ -20,7 +20,7 @@ const Portfolio = () => {
             <div class="card lg:card-side bg-base-100 md:flex justify-around md:mx-16 ">
 
                 <div class="my-auto">
-                    <div className='text-3xl font-extrabold'>
+                    <div className='text-5xl font-extrabold'>
                         <h2 className=''>Hi! I Am</h2>
                         <h2 className='text-primary'>Ashik Ahmed</h2>
                     </div>
@@ -37,7 +37,7 @@ const Portfolio = () => {
                 </div>
             </div>
 
-            <div class="card lg:card-side bg-base-100 md:flex justify-center md:mt-12 md:mx-16 ">
+            <div class="card lg:card-side bg-base-100 md:flex justify-center mt-12 md:mx-16 ">
 
                 <figure>
                     <img className='bg-secondary justify-end rounded-2xl' src={myPhoto2} alt="Album" />
@@ -81,7 +81,7 @@ const Portfolio = () => {
 
 
 
-            <div className='md:mx-16 md:mt-12'>
+            <div className='md:mx-16 md:mt-12 mt-5'>
                 <h3 className='text-left border-b-4 text-2xl font-extrabold text-secondary'>My Expertise Areas</h3>
 
                 <div className='md:flex gap-4 md:mt-4'>
@@ -119,12 +119,12 @@ const Portfolio = () => {
             </div>
 
 
-            <div className='md:mx-16 md:mt-12'>
+            <div className='md:mx-16 md:mt-12 mt-5'>
                 <h3 className='text-left border-b-4  text-2xl font-extrabold text-secondary'>Education</h3>
 
                 <div className='md:mt-4'>
                     <div className='md:flex gap-4'>
-                        <div class="stats md:w-1/2 shadow-xl bg-green-200 border-l-8 border-blue-600">
+                        <div class="stats md:w-1/2 w-full shadow-xl bg-green-200 border-l-8 border-blue-600">
 
                             <div class="stat text-left">
                                 <div className='font-bold text-secondary text-xl'>B.Sc.</div>
@@ -137,7 +137,7 @@ const Portfolio = () => {
                             </div>
 
                         </div>
-                        <div class="stats md:w-1/2 shadow-xl bg-green-200 border-l-8 border-blue-600">
+                        <div class="stats md:w-1/2  w-full shadow-xl bg-green-200 border-l-8 border-blue-600">
 
                             <div class="stat text-left">
                                 <div className='font-bold text-secondary text-xl'>H.S.C</div>
@@ -153,7 +153,7 @@ const Portfolio = () => {
                     </div>
 
                     <div className='md:flex gap-4 mt-6'>
-                        <div class="stats md:w-1/2 shadow-xl bg-green-200 border-l-8 border-blue-600">
+                        <div class="stats md:w-1/2 w-full shadow-xl bg-green-200 border-l-8 border-blue-600">
 
                             <div class="stat text-left">
                                 <div className='font-bold text-secondary text-xl'>S.S.C</div>
@@ -171,7 +171,7 @@ const Portfolio = () => {
             </div>
 
 
-            <div className='md:mx-16 md:mt-12'>
+            <div className='md:mx-16 md:mt-12 mt-5'>
 
                 <h3 className='text-left text-2xl font-extrabold border-b-4 text-secondary'>My Best Projects</h3>
 
@@ -219,7 +219,6 @@ const Portfolio = () => {
                                         <img className='md:w-1/2 m-auto' src={review} alt="" />
                                     </figure>
                                     <div className='font-bold text-secondary text-xl md:mt-20'>Product Review Website</div>
-
                                     <div className='font-bold text-xl'>Tech: HTML5, CSS3, React, Tailwind, REST API</div>
                                 </div>
 
@@ -231,14 +230,14 @@ const Portfolio = () => {
 
 
             <div className='md:mt-16 bg-yellow-300 py-4'>
-                <h2 className='text-3xl font-bold'>Contact Me</h2>
+                <h2 className='text-3xl font-extrabold'>Contact Me</h2>
                 <div className='mt-6'>
                     <h3>Ashik Ahmed</h3>
-                    <p>Email: ashikahmed121@gmail.com</p>
+                    <p>Email: <span className='font-mono'>ashikahmed121@gmail.com</span></p>
                     <p>Contact: 01521464568</p>
 
 
-                    <div class="">
+                    <div class="mt-5">
                         <div class="flex items-center justify-center">
                             <input type="text" placeholder="Your Comment" class="input input-bordered" />
                             <button class="btn btn-square text-3xl">
