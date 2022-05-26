@@ -33,11 +33,11 @@ const Product = (props) => {
                     </div>
                     <div>
                         {dbUser.role !== 'admin' ?
-                            <div className='inline-flex justify-end ml-5 items-center'>
-                                <Link to={`/confirm-order/${_id}`} style={{ 'background': '#32C6D9' }} className="flex justify-end items-center gap-x-2 mb-2 py-2 px-3 text-sm font-medium text-center text-white  rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+
+                            <div className='flex justify-center'>
+                                <Link to={`/confirm-order/${_id}`} className="btn btn-primary btn-sm inline-flex mx-auto justify-center items-center gap-x-2 mb-2 text-sm font-medium text-center text-white  rounded-lg ">
                                     <span><FaCartPlus /></span>
                                     Buy Now
-
                                 </Link>
                             </div>
                             :

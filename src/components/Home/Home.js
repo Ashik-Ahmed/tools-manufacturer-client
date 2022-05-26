@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import bannerImage from '../../Assets/images/banner.png'
 import auth from '../../firebase.init';
+import useDBUser from '../../hooks/useDBUser';
 import useProducts from '../../hooks/useProducts';
 import Product from '../Product/Product';
 import ReviewCard from '../ReviewCard/ReviewCard';
@@ -11,6 +12,7 @@ import Loading from '../Shared/Loading';
 const Home = () => {
 
     const [user, loading] = useAuthState(auth);
+    const [dbUser] = useDBUser(user)
 
     const [products, isLoading, refetch] = useProducts();
     // const [reviews, setReviews] = useState([]);
@@ -51,10 +53,36 @@ const Home = () => {
                         products.length > 0 && products?.slice(0, 6).map(product => <Product key={product._id} product={product}></Product>)
                     }
                 </div>
-                <Link to='/all-products' className='btn btn-primary'>See All Products</Link>
+                {dbUser.role !== 'admin' && <Link to='/all-products' className='btn btn-secondary'>See All Products</Link>}
             </div>
 
+            <div className='text-3xl font-bold text-primary text-left md:mx-12'>
+                <div className=' pb-3 border-b-4 mb-6'>{dbUser?.role === 'admin' ?
 
+                    <p>Products Need to Restock</p>
+
+                    :
+
+                    <p>Popular Items This Month</p>
+
+                }
+
+                </div>
+
+                <div className='md:flex gap-4 justify-center'>
+                    {
+                        products.map(product => {
+                            if (product.quantity < 10) {
+                                return <Product key={product._id} product={product}></Product>
+
+                            }
+                        })
+                    }
+                </div>
+
+
+
+            </div>
 
             <div class="stats shadow w-full md:w-3/4 mx-auto md:my-10">
                 <div class="stat">
@@ -91,7 +119,7 @@ const Home = () => {
 
 
             <div className='mt-8'>
-                <h3 className='text-3xl font-bold pb-2 border-b-4'>What People Say About Us</h3>
+                <h3 className='text-3xl font-bold pb-2 md:mx-12 text-left text-primary border-b-4'>What People Say About Us</h3>
 
                 <div className='md:grid grid-cols-2 py-4 md:mx-32'>
                     {
