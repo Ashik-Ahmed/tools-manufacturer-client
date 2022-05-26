@@ -8,6 +8,7 @@ const ManageOrders = () => {
 
     const [modal, setModal] = useState(null);
 
+    // getting orders data 
     const { data: orders, isLoading, refetch } = useQuery('orders', () => fetch('http://localhost:5000/manage-orders', {
         method: 'GET',
         headers: {
@@ -20,6 +21,7 @@ const ManageOrders = () => {
         return <Loading />
     }
 
+    // delete any unpaid order 
     const handleOrderDelete = (id) => {
         const url = `http://localhost:5000/order/${id}`;
 
@@ -32,6 +34,7 @@ const ManageOrders = () => {
             })
     }
 
+    // make order status shipped to paid orders 
     const handleShipment = (id) => {
 
         fetch(`http://localhost:5000/update-order/${id}`, {

@@ -11,7 +11,7 @@ const ConfirmOrder = () => {
     const [user] = useAuthState(auth);
     const { id } = useParams();
     const [product, setProduct] = useSingleProduct(id);
-    const [quantity, setQuantity] = useState(1);
+    const [inputQuantity, setInputQuantity] = useState(1);
 
     // if (!product.name) {
     //     return <Loading />
@@ -24,7 +24,7 @@ const ConfirmOrder = () => {
 
     // update quantity value by uesr input 
     const handleQuantity = (e) => {
-        setQuantity(e.target.value);
+        setInputQuantity(e.target.value);
 
     }
 
@@ -38,20 +38,25 @@ const ConfirmOrder = () => {
         const address = event.target.address.value;
         const order = {
             productId: product._id,
-            quantity: quantity || 1,
+            quantity: inputQuantity || 1,
             customerName: name,
             customerEmail: email,
             customerNumber: contactNumber,
             customerAddress: address
         }
 
-        if (!quantity) {
+        const updatedProduct = {
+            quantity: parseInt(product.quantity) - parseInt(inputQuantity)
+        }
+        console.log(updatedProduct);
+
+        if (!inputQuantity) {
             toast.warn('Please enter Quantity');
         }
-        else if (parseInt(quantity) < parseInt(product.minimum)) {
+        else if (parseInt(inputQuantity) < parseInt(product.minimum)) {
             toast.warn('Order quantity should more that minimum order quantity')
         }
-        else if (parseInt(quantity) > parseInt(product.quantity)) {
+        else if (parseInt(inputQuantity) > parseInt(product.quantity)) {
             toast.warn('Order quantity is more that available quantity')
         }
         else {
@@ -68,9 +73,22 @@ const ConfirmOrder = () => {
                     console.log(data);
                     toast.success('Order Placed Successfully');
                     event.target.reset();
+
+                    const url = (`http://localhost:5000/tool/${product._id}`)
+                    console.log(url)
+                    fetch(`http://localhost:5000/tool/${product._id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'content-type': 'application/json',
+                        },
+                        body: JSON.stringify(updatedProduct)
+                    })
+                        .then(res => res.json())
+                        .then(data => console.log('product updated : ', data))
+
                 })
 
-            console.log('Product Id:', order.productId, 'name: ', name, 'email: ', email, 'number: ', contactNumber, 'address', address, 'Quantity: ', quantity);
+            console.log('Product Id:', order.productId, 'name: ', name, 'email: ', email, 'number: ', contactNumber, 'address', address, 'Quantity: ', inputQuantity);
         }
     }
 

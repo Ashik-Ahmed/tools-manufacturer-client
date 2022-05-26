@@ -6,10 +6,12 @@ import ProductRow from './ProductRow';
 
 const ManageProducts = () => {
 
+    // getting all products from db 
     const [products, isLoading, refetch] = useProducts();
     const [modal, setModal] = useState(null)
 
 
+    // delete any product 
     const handleProductDelete = (id) => {
 
         const url = `http://localhost:5000/tool/${id}`;

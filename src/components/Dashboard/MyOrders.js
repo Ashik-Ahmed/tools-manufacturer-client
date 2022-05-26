@@ -3,12 +3,14 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import auth from '../../firebase.init';
+import CancelMyOrderModal from './CancelMyOrderModal';
 import OrderRow from './OrderRow';
 
 const MyOrders = () => {
 
     const [orders, setOrders] = useState([]);
     const [user] = useAuthState(auth);
+    const [modal, setModal] = useState(null);
 
     //get products by user email
     useEffect(() => {
@@ -26,27 +28,21 @@ const MyOrders = () => {
 
     }, [user])
 
-    console.log(orders);
-
     // delete a product from db and ui 
     const handleCancelOrder = (id) => {
 
-        const proceed = window.confirm("Are you sure??");
-        if (proceed) {
-            const url = `http://localhost:5000/order/${id}`;
+        const url = `http://localhost:5000/order/${id}`;
 
-            fetch(url, {
-                method: 'DELETE'
+        fetch(url, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    const remaining = orders.filter(tool => tool._id !== id);
+                    setOrders(remaining);
+                }
             })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.deletedCount > 0) {
-                        const remaining = orders.filter(tool => tool._id !== id);
-                        setOrders(remaining);
-                    }
-                })
-
-        }
 
     }
 
@@ -72,7 +68,10 @@ const MyOrders = () => {
                             </thead>
                             <tbody>
                                 {
-                                    orders?.map(tool => <OrderRow key={tool._id} tool={tool} handleCancelOrder={handleCancelOrder}></OrderRow>)
+                                    orders?.map(tool => <OrderRow key={tool._id} tool={tool} setModal={setModal} handleCancelOrder={handleCancelOrder} ></OrderRow>)
+                                }
+                                {
+                                    modal && <CancelMyOrderModal order={modal} handleCancelOrder={handleCancelOrder}></CancelMyOrderModal>
                                 }
                             </tbody>
 

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import useSingleProduct from '../../../hooks/useSingleProduct';
 import Loading from '../../Shared/Loading';
 
 const OrderRow = ({ order, setModal, handleShipment }) => {
 
+    // getting single ordered product 
     const [product] = useSingleProduct(order.productId);
 
     if (!product.photo) {
@@ -13,15 +13,6 @@ const OrderRow = ({ order, setModal, handleShipment }) => {
 
     return (
         <tr className='hover:bg-red-200 text-sm'>
-            {/* <td>
-                <div class="flex items-center space-x-3">
-                    <div class="avatar">
-                        <div class="mask mask-squircle w-12 h-12">
-                            <img src={product.photo} alt="Avatar Tailwind CSS Component" />
-                        </div>
-                    </div>
-                </div>
-            </td> */}
             <td>
                 <div>{product.name}</div>
             </td>

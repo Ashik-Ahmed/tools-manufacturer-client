@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import useSingleProduct from '../../hooks/useSingleProduct';
 import Loading from '../Shared/Loading';
 
-const OrderRow = ({ tool, handleCancelOrder }) => {
+const OrderRow = ({ tool, setModal, handleCancelOrder }) => {
 
+    // getting single ordered product 
     const [product] = useSingleProduct(tool.productId);
 
     if (!product.name) {
@@ -22,20 +23,18 @@ const OrderRow = ({ tool, handleCancelOrder }) => {
                     </div>
                     <div>
                         <div class="font-bold">{product.name}</div>
-                        {/* <div class="text-sm opacity-50">United States</div> */}
                     </div>
                 </div>
             </td>
             <td>
                 {product.price}
                 <br />
-                {/* <span class="badge badge-ghost badge-sm">Desktop Support Technician</span> */}
             </td>
             <td>{tool.quantity}</td>
             <td>{tool.quantity * product.price}</td>
             <td>{tool.status ? <p className='text-green-500 font-bold'>Shipped</p> : <p className='text-red-500 font-bold'>Pending</p>}</td>
             <th className='flex-col gap-x-2'>
-                {!tool.paid && <button onClick={() => handleCancelOrder(tool._id)} class="btn bg-red-800 btn-xs">Cancel</button>}
+                {!tool.paid && <label onClick={() => setModal(tool)} for="order-cancel-modal" class="btn bg-red-800 btn-xs">Cancel</label>}
 
             </th>
             <th className='flex-col gap-x-2'>
