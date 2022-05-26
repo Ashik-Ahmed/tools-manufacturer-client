@@ -14,7 +14,7 @@ const ManageProducts = () => {
     // delete any product 
     const handleProductDelete = (id) => {
 
-        const url = `http://localhost:5000/tool/${id}`;
+        const url = `https://immense-crag-05467.herokuapp.com/tool/${id}`;
 
         fetch(url, {
             method: 'DELETE'

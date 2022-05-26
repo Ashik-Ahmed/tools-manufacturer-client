@@ -9,7 +9,7 @@ import CheckoutForm from './CheckoutForm';
 const Payment = () => {
     const { orderId } = useParams();
     const [product, setProduct] = useState([]);
-    const url = `http://localhost:5000/order/${orderId}`;
+    const url = `https://immense-crag-05467.herokuapp.com/order/${orderId}`;
     // console.log(url)
 
     const { data: order, isLoading } = useQuery('tool', () => fetch(url).then(res => res.json()));
@@ -18,7 +18,7 @@ const Payment = () => {
 
 
     if (order?.productId) {
-        const productUrl = `http://localhost:5000/tools/${order?.productId}`;
+        const productUrl = `https://immense-crag-05467.herokuapp.com/tools/${order?.productId}`;
         // console.log(productUrl)
         fetch(productUrl, {
             method: 'GET',
@@ -36,7 +36,7 @@ const Payment = () => {
 
     // useEffect(() => {
     //     if (order?.productId) {
-    //         const productUrl = `http://localhost:5000/tools/${order?.productId}`;
+    //         const productUrl = `https://immense-crag-05467.herokuapp.com/tools/${order?.productId}`;
     //         console.log(productUrl)
     //         fetch(productUrl, {
     //             method: 'GET',
@@ -55,7 +55,7 @@ const Payment = () => {
     //     }
     // }, [order])
 
-    // const productUrl = `http://localhost:5000/tools/${order?.productId}`;
+    // const productUrl = `https://immense-crag-05467.herokuapp.com/tools/${order?.productId}`;
     // console.log('product url: ', productUrl);
 
     // const { data: product, loading } = useQuery('product', () => fetch(productUrl, {

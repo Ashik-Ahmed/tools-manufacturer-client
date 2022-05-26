@@ -9,7 +9,7 @@ const ManageOrders = () => {
     const [modal, setModal] = useState(null);
 
     // getting orders data 
-    const { data: orders, isLoading, refetch } = useQuery('orders', () => fetch('http://localhost:5000/manage-orders', {
+    const { data: orders, isLoading, refetch } = useQuery('orders', () => fetch('https://immense-crag-05467.herokuapp.com/manage-orders', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -23,7 +23,7 @@ const ManageOrders = () => {
 
     // delete any unpaid order 
     const handleOrderDelete = (id) => {
-        const url = `http://localhost:5000/order/${id}`;
+        const url = `https://immense-crag-05467.herokuapp.com/order/${id}`;
 
         fetch(url, {
             method: 'DELETE'
@@ -37,7 +37,7 @@ const ManageOrders = () => {
     // make order status shipped to paid orders 
     const handleShipment = (id) => {
 
-        fetch(`http://localhost:5000/update-order/${id}`, {
+        fetch(`https://immense-crag-05467.herokuapp.com/update-order/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',

@@ -5,7 +5,7 @@ import Loading from '../Shared/Loading';
 const UpdateProduct = () => {
     const { id } = useParams();
 
-    const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`http://localhost:5000/tools/${id}`, {
+    const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`https://immense-crag-05467.herokuapp.com/tools/${id}`, {
         method: 'GET',
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -34,7 +34,7 @@ const UpdateProduct = () => {
             quantity = parseInt(product.quantity) + parseInt(inputQuantity);
 
             //send data to server
-            const url = `http://localhost:5000/tool/${id}`;
+            const url = `https://immense-crag-05467.herokuapp.com/tool/${id}`;
             fetch(url, {
                 method: 'PUT',
                 headers: {

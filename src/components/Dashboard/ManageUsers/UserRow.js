@@ -6,7 +6,7 @@ const UserRow = ({ user, refetch }) => {
     const [dbUser] = useDBUser(user);
 
     const handleMakeAdmin = () => {
-        fetch(`http://localhost:5000/user/${dbUser.email}`, {
+        fetch(`https://immense-crag-05467.herokuapp.com/user/${dbUser.email}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',

@@ -17,7 +17,7 @@ const Home = () => {
     const [products, isLoading, refetch] = useProducts();
     // const [reviews, setReviews] = useState([]);
 
-    const { data: reviews, reviewLoading } = useQuery('reviews', () => fetch('http://localhost:5000/reviews', {
+    const { data: reviews, reviewLoading } = useQuery('reviews', () => fetch('https://immense-crag-05467.herokuapp.com/reviews', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',

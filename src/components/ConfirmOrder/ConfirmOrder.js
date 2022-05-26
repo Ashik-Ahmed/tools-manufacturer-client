@@ -63,7 +63,7 @@ const ConfirmOrder = () => {
         }
         else {
 
-            fetch('http://localhost:5000/confirm-order', {
+            fetch('https://immense-crag-05467.herokuapp.com/confirm-order', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
@@ -76,9 +76,9 @@ const ConfirmOrder = () => {
                     toast.success('Order Placed Successfully');
                     event.target.reset();
 
-                    const url = (`http://localhost:5000/tool/${product._id}`)
+                    const url = (`https://immense-crag-05467.herokuapp.com/tool/${product._id}`)
                     console.log(url)
-                    fetch(`http://localhost:5000/tool/${product._id}`, {
+                    fetch(`https://immense-crag-05467.herokuapp.com/tool/${product._id}`, {
                         method: 'PUT',
                         headers: {
                             'content-type': 'application/json',

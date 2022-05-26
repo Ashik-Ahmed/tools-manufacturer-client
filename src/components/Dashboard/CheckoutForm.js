@@ -16,7 +16,7 @@ const CheckoutForm = ({ order, product }) => {
 
     useEffect(() => {
         if (product.price > 0) {
-            fetch('http://localhost:5000/create-payment-intent', {
+            fetch('https://immense-crag-05467.herokuapp.com/create-payment-intent', {
                 method: 'POST',
                 headers: {
                     "content-type": "application/json"
@@ -38,7 +38,7 @@ const CheckoutForm = ({ order, product }) => {
 
 
     // useEffect(() => {
-    // fetch('http://localhost:5000/create-payment-intent', {
+    // fetch('https://immense-crag-05467.herokuapp.com/create-payment-intent', {
     //     method: 'POST',
     //     headers: {
     //         "content-type": "application/json"
@@ -110,7 +110,7 @@ const CheckoutForm = ({ order, product }) => {
                 order: _id,
                 transactionId: paymentIntent.id,
             }
-            fetch(`http://localhost:5000/order/${_id}`, {
+            fetch(`https://immense-crag-05467.herokuapp.com/order/${_id}`, {
                 method: 'PATCH',
                 headers: {
                     "content-type": "application/json"

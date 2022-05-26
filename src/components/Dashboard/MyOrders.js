@@ -15,7 +15,7 @@ const MyOrders = () => {
     //get products by user email
     useEffect(() => {
         const email = user.email;
-        const url = `http://localhost:5000/myOrder?email=${email}`;
+        const url = `https://immense-crag-05467.herokuapp.com/myOrder?email=${email}`;
 
         fetch(url, {
             headers: {
@@ -31,7 +31,7 @@ const MyOrders = () => {
     // delete a product from db and ui 
     const handleCancelOrder = (id) => {
 
-        const url = `http://localhost:5000/order/${id}`;
+        const url = `https://immense-crag-05467.herokuapp.com/order/${id}`;
 
         fetch(url, {
             method: 'DELETE'

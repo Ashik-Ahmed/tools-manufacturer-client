@@ -5,7 +5,7 @@ const useSingleProduct = (id) => {
 
     //load the specific product by id
     useEffect(() => {
-        const url = `http://localhost:5000/tools/${id}`;
+        const url = `https://immense-crag-05467.herokuapp.com/tools/${id}`;
         fetch(url, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`

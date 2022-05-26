@@ -4,9 +4,10 @@ import auth from "../firebase.init";
 
 const useDBUser = (user) => {
     const [dbUser, setDbUser] = useState([]);
+    const [dbLoading, setDbLoading] = useState(true);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/user/${user?.email}`, {
+        fetch(`https://immense-crag-05467.herokuapp.com/user/${user?.email}`, {
             method: 'GET',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -14,10 +15,11 @@ const useDBUser = (user) => {
         })
             .then(res => res.json())
             .then(data => {
-                setDbUser(data)
+                setDbUser(data);
+                setDbLoading(false);
             })
     }, [user])
-    return [dbUser];
+    return [dbUser, dbLoading];
 }
 
 export default useDBUser;

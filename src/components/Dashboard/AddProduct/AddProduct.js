@@ -21,7 +21,7 @@ const AddProduct = () => {
         }
         console.log(newProduct)
 
-        fetch('http://localhost:5000/add-product', {
+        fetch('https://immense-crag-05467.herokuapp.com/add-product', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
