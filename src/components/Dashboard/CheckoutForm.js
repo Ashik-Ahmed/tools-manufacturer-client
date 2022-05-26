@@ -12,27 +12,51 @@ const CheckoutForm = ({ order, product }) => {
     const [clientSecret, setClientSecret] = useState('');
 
     const { _id, productId, quantity, customerEmail } = order;
+    // console.log('product price: ', product.price, 'Quantity: ', quantity)
 
     useEffect(() => {
-        fetch('http://localhost:5000/create-payment-intent', {
-            method: 'POST',
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify({
-                price: product.price,
-                quantity: quantity,
-            }),
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data?.clientSecret) {
-                    setClientSecret(data.clientSecret)
-                }
-
+        if (product.price > 0) {
+            fetch('http://localhost:5000/create-payment-intent', {
+                method: 'POST',
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify({
+                    price: product.price,
+                    quantity: quantity,
+                }),
             })
+                .then(res => res.json())
+                .then(data => {
+                    if (data?.clientSecret) {
+                        setClientSecret(data.clientSecret)
+                    }
 
-    }, [quantity, product])
+                })
+        }
+    }, [product.price, quantity])
+
+
+    // useEffect(() => {
+    // fetch('http://localhost:5000/create-payment-intent', {
+    //     method: 'POST',
+    //     headers: {
+    //         "content-type": "application/json"
+    //     },
+    //     body: JSON.stringify({
+    //         price: parseInt(product.price),
+    //         quantity: parseInt(quantity),
+    //     }),
+    // })
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         if (data?.clientSecret) {
+    //             setClientSecret(data.clientSecret)
+    //         }
+
+    //     })
+
+    //}, [quantity, product])
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -78,7 +102,7 @@ const CheckoutForm = ({ order, product }) => {
             setCardError('');
             setTransactionId(paymentIntent.id)
             setSuccess('Congratulations! Your payment is successful');
-            console.log(paymentIntent);
+            // console.log(paymentIntent);
 
 
             // store payment info to DB 
@@ -96,7 +120,7 @@ const CheckoutForm = ({ order, product }) => {
                 .then(res => res.json())
                 .then(data => {
                     setProcessing(false);
-                    console.log(data);
+                    // console.log(data);
                 })
         }
     }

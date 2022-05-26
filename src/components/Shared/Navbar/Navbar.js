@@ -23,6 +23,7 @@ const Navbar = () => {
                         <li><Link to='/'>Home</Link></li>
                         <li><Link to='/blogs'>Blogs</Link></li>
                         <li><Link to='/portfolio'>Portfolio</Link></li>
+                        <li><Link to='/contact'>Contact Us</Link></li>
                         {/* <li tabindex="0">
                             <a class="justify-between">
                                 Parent
@@ -52,6 +53,7 @@ const Navbar = () => {
                     <li><Link to='/'>Home</Link></li>
                     <li><Link to='/blogs'>Blogs</Link></li>
                     <li><Link to='/portfolio'>Portfolio</Link></li>
+                    <li><Link to='/contact'>Contact Us</Link></li>
                     {/* <li tabindex="0">
                         <a>
                             Parent

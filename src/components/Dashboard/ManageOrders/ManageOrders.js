@@ -45,14 +45,17 @@ const ManageOrders = () => {
             body: JSON.stringify({ shipment: 'approved' }),
         })
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(data => {
+                console.log(data);
+                refetch();
+            })
     }
 
     return (
         <div>
             <h2>manage All Orders</h2>
-            <div class="overflow-x-auto m-6">
-                <table class="table w-full ">
+            <div class=" m-6">
+                <table class="table  max-w-md ">
                     <thead>
                         <tr>
                             {/* <th>Photo</th> */}

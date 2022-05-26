@@ -30,7 +30,7 @@ const ManageProducts = () => {
     }
 
     return (
-        <div className='h-screen'>
+        <div className='h-fit'>
             <h2>manage All Products Here</h2>
             <div class="overflow-x-auto m-6">
                 <table class="table w-full  ">

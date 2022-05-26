@@ -1,7 +1,6 @@
-import React from 'react';
-import { useQuery } from 'react-query';
 
 const AddProduct = () => {
+
 
     const handleAddProduct = (event) => {
         event.preventDefault();
@@ -31,8 +30,9 @@ const AddProduct = () => {
         })
             .then(res => res.json())
             .then(data => {
-                alert('Successfully added');
-                console.log(data)
+                console.log(data);
+                event.target.reset();
+                alert("Product Added Successfully");
             })
     }
 

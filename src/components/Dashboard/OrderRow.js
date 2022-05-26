@@ -22,7 +22,7 @@ const OrderRow = ({ tool, setModal, handleCancelOrder }) => {
                         </div>
                     </div>
                     <div>
-                        <div class="font-bold">{product.name}</div>
+                        <div>{product.name}</div>
                     </div>
                 </div>
             </td>
@@ -32,7 +32,7 @@ const OrderRow = ({ tool, setModal, handleCancelOrder }) => {
             </td>
             <td>{tool.quantity}</td>
             <td>{tool.quantity * product.price}</td>
-            <td>{tool.status ? <p className='text-green-500 font-bold'>Shipped</p> : <p className='text-red-500 font-bold'>Pending</p>}</td>
+            <td>{tool.status ? <p className='text-green-500'>Shipped</p> : <p className='text-red-500'>Pending</p>}</td>
             <th className='flex-col gap-x-2'>
                 {!tool.paid && <label onClick={() => setModal(tool)} for="order-cancel-modal" class="btn bg-red-800 btn-xs">Cancel</label>}
 

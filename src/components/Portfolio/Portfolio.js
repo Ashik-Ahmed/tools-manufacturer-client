@@ -40,15 +40,15 @@ const Portfolio = () => {
             <div class="card lg:card-side bg-base-100 md:flex justify-center mt-12 md:mx-16 ">
 
                 <figure>
-                    <img className='bg-secondary justify-end rounded-2xl' src={myPhoto2} alt="Album" />
+                    <img className='bg-pink-400 justify-end rounded-2xl' src={myPhoto2} alt="Album" />
                 </figure>
                 <div class="my-auto md:w-1/2 md:ml-16">
                     <h3 className='text-left border-b-4 font-semibold text-secondary'>About Me</h3>
                     <div className='text-3xl text-left font-extrabold'>
                         <h2 className=''>Why Hire Me for your</h2>
-                        <h2 className='text-primary'>Next Project</h2>
+                        <h2 className='text-primary'>Office/Next Project</h2>
                     </div>
-                    <p className='text-lg italic md:mt-6'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo quidem, id sit doloremque enim pariatur alias cumque? Nulla blanditiis aperiam quam assumenda quia dolorum rerum dicta neque, quaerat ex necessitatibus optio laboriosam alias labore tempore maiores ut nihil officiis ipsa.</p>
+                    <p className='text-lg italic md:mt-6'>I am a passionate Programmer. I truly value my tasks and do my best level to complete within given time. You can see my career summary below. Currently, I am working on a full time project and also looking for a part-time job.</p>
 
                     <div className='md:flex md:justify-center grid grid-cols-1 gap-4 md:mt-6'>
                         <div class="stats shadow-xl bg-gray-200 border-b-2 border-l-2 border-green-600">
@@ -84,36 +84,56 @@ const Portfolio = () => {
             <div className='md:mx-16 md:mt-12 mt-5'>
                 <h3 className='text-left border-b-4 text-2xl font-extrabold text-secondary'>My Expertise Areas</h3>
 
-                <div className='md:flex gap-4 md:mt-4'>
-                    <div class="card md:w-40 bg-base-100 shadow-xl">
-                        <figure><img className='' src={html} alt="Shoes" /></figure>
-                        {/* <div class="card-body">
+                <div className='md:grid grid-cols-3  gap-4 md:mt-4'>
+                    <div className='rounded-lg text-center mx-auto shadow-xl bg-white'>
+                        <h2 class="card-title py-2">HTML5: Advanced</h2>
+                        <div class="card md:w-48 mx-auto px-3">
+                            <figure><img className='' src={html} alt="Shoes" /></figure>
+
+                            {/* <div class="card-body">
                         <h2 class="card-title">Shoes!</h2>
                         <p>If a dog chews shoes whose shoes does he choose?</p>
                         <div class="card-actions justify-end">
                             <button class="btn btn-primary">Buy Now</button>
                         </div>
                     </div> */}
-                    </div>
-                    <div class="card md:w-40 bg-base-100 shadow-xl">
-                        <figure><img className='' src={css} alt="Shoes" /></figure>
+                        </div>
 
                     </div>
-                    <div class="card md:w-40 bg-base-100 shadow-xl">
-                        <figure><img className='' src={JS} alt="Shoes" /></figure>
+                    <div className='rounded-lg text-center mx-auto shadow-xl bg-white'>
+                        <h2 class="card-title py-2">CSS3: Advanced</h2>
+                        <div class="card md:w-48 mx-auto">
+                            <figure><img className='' src={css} alt="Shoes" /></figure>
 
+                        </div>
                     </div>
-                    <div class="card md:w-40 bg-base-100 shadow-xl">
-                        <figure><img className='' src={es6} alt="Shoes" /></figure>
+                    <div className='rounded-lg text-center mx-auto shadow-xl bg-white'>
+                        <h2 class="card-title py-2">JavaScript: Advanced</h2>
+                        <div class="card md:w-48 mx-auto">
+                            <figure><img className='' src={JS} alt="Shoes" /></figure>
 
+                        </div>
                     </div>
-                    <div class="card md:w-40 bg-base-100 shadow-xl">
-                        <figure><img className='' src={node} alt="Shoes" /></figure>
+                    <div className='rounded-lg text-center mx-auto shadow-xl bg-white'>
+                        <h2 class="card-title py-2">ES6: Advanced</h2>
+                        <div class="card md:w-48 mx-auto">
+                            <figure><img className='' src={es6} alt="Shoes" /></figure>
 
+                        </div>
                     </div>
-                    <div class="card md:w-40 bg-base-100 shadow-xl">
-                        <figure><img className='' src={mongo} alt="Shoes" /></figure>
+                    <div className='rounded-lg text-center mx-auto shadow-xl bg-white'>
+                        <h2 class="card-title py-2">NodeJs: Advanced</h2>
+                        <div class="card md:w-48 mx-auto">
+                            <figure><img className='' src={node} alt="Shoes" /></figure>
 
+                        </div>
+                    </div>
+                    <div className='rounded-lg text-center mx-auto shadow-xl bg-white'>
+                        <h2 class="card-title py-2">MongoDB: Advanced</h2>
+                        <div class="card md:w-40 mx-auto">
+                            <figure><img className='' src={mongo} alt="Shoes" /></figure>
+
+                        </div>
                     </div>
                 </div>
             </div>

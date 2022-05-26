@@ -10,11 +10,11 @@ const Product = (props) => {
 
     const [user] = useAuthState(auth);
     const [dbUser] = useDBUser(user);
-    const { _id, name, price, quantity, supplier, minimum, description, photo, type } = props.product;
+    const { _id, name, price, quantity, minimum, description, photo } = props.product;
 
     return (
         <div>
-            <div className="md:w-64 text-left bg-white rounded-lg border h-full border-gray-200 shadow-md hover:scale-110 duration-500">
+            <div className="md:w-48 text-left bg-white rounded-lg border h-full border-gray-200 shadow-md hover:scale-110 duration-500">
                 <div class="indicator mx-auto flex">
                     {quantity > 0 ? '' : <span class="indicator-item indicator-center indicator-middle badge badge-secondary">Out of Stock</span>}
                     <img className="rounded-t-lg h-28 mx-auto p-2" src={photo || 'https://previews.123rf.com/images/aquir/aquir1311/aquir131100316/23569861-sample-grunge-red-round-stamp.jpg'} alt="" />
@@ -26,7 +26,7 @@ const Product = (props) => {
                     <div className="p-5 text-sm">
                         <h5 className="mb-2 font-bold tracking-tight text-gray-900 ">{name}</h5>
                         <p className='text-lg font-bold text-secondary'>$ {price}</p>
-                        <p className="mb-3 text-xs font-normal italic text-gray-700 dark:text-gray-400">{description?.slice(0, 40) || 'Sample description will appear here'}</p>
+                        <p className="mb-3 text-xs font-normal italic text-gray-700 dark:text-gray-400">{description?.slice(0, 78) || 'Sample description will appear here'}</p>
                         <p>Available: {quantity > 0 ? quantity : 'Out of Stock'}</p>
                         <p>Minimum Order: {minimum || 'N/A'}</p>
 
@@ -35,10 +35,22 @@ const Product = (props) => {
                         {dbUser.role !== 'admin' ?
 
                             <div className='flex justify-center'>
-                                <Link to={`/confirm-order/${_id}`} className="btn btn-primary btn-sm inline-flex mx-auto justify-center items-center gap-x-2 mb-2 text-sm font-medium text-center text-white  rounded-lg ">
-                                    <span><FaCartPlus /></span>
-                                    Buy Now
-                                </Link>
+
+                                {
+                                    parseInt(quantity) >= parseInt(minimum) ?
+
+                                        <Link to={`/confirm-order/${_id}`} className="btn btn-primary btn-sm inline-flex mx-auto justify-center items-center gap-x-2 mb-2 text-sm font-medium text-center text-white  rounded-lg ">
+                                            <span><FaCartPlus /></span>
+                                            Buy Now
+                                        </Link>
+                                        :
+
+                                        <Link to={`/confirm-order/${_id}`} className="btn btn-primary btn-sm inline-flex mx-auto justify-center items-center gap-x-2 mb-2 text-sm font-medium text-center text-white  rounded-lg " disabled>
+                                            <span><FaCartPlus /></span>
+                                            Buy Now
+                                        </Link>
+
+                                }
                             </div>
                             :
                             <div className='inline-flex justify-end ml-5 items-center'>

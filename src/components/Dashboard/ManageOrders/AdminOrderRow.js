@@ -12,7 +12,7 @@ const OrderRow = ({ order, setModal, handleShipment }) => {
     }
 
     return (
-        <tr className='hover:bg-red-200 text-sm'>
+        <tr className='hover:bg-red-200 max-w-md text-sm'>
             <td>
                 <div>{product.name}</div>
             </td>
@@ -43,11 +43,11 @@ const OrderRow = ({ order, setModal, handleShipment }) => {
                             order.status === 'approved' ?
                                 <p>Shipped</p>
                                 :
-                                <button onClick={() => handleShipment(order._id)} class="btn bg-green-600 btn-sm">Make Shipment</button>
+                                <button onClick={() => handleShipment(order._id)} class="btn bg-green-600 btn-xs">Make Shipment</button>
                         }
                     </div>
                     :
-                    <label onClick={() => setModal(order)} for="order-delete-modal" class="btn bg-red-600 btn-sm ml-3">Delete</label>
+                    <label onClick={() => setModal(order)} for="order-delete-modal" class="btn bg-red-600 btn-xs ml-3">Delete</label>
                 }
 
                 { }

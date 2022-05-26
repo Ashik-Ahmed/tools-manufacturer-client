@@ -47,7 +47,6 @@ const UpdateProduct = () => {
                     console.log(data)
                     if (data.modifiedCount > 0) {
                         refetch();
-                        alert('Product Updated Successfully');
                     }
                 })
         }
@@ -70,7 +69,6 @@ const UpdateProduct = () => {
                         <h1 class="text-5xl font-bold md:my-4">{product.name}</h1>
                         <p className='font-bold text-left'>Details: <span className='text-sm font-normal italic'>{product.description}</span></p>
                         <p className='font-bold text-left'>Available Qty. : {product.quantity}</p>
-                        <p className='font-bold text-left'>Sold: {product.sold}</p>
                         <div className='bg-gray-400 mt-8 p-2 inline-block rounded'>
                             <form className='flex items-center gap-x-2 ' onSubmit={handleUpdateQuantity}>
                                 <input className='rounded p-1' type="number" name='updatedQuantity' placeholder='Quantity' />

@@ -23,6 +23,7 @@ import ManageProducts from './components/Dashboard/ManageProducts/ManageProducts
 import ManageOrders from './components/Dashboard/ManageOrders/ManageOrders';
 import Portfolio from './components/Portfolio/Portfolio';
 import Products from './components/Products/Products';
+import Contact from './components/Contact/Contact';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path='/blogs' element={<Blogs />}></Route>
         <Route path='/portfolio' element={<Portfolio />}></Route>
         <Route path='/all-products' element={<Products />}></Route>
+        <Route path='/contact' element={<Contact />}></Route>
         <Route path='/inventory/:id' element={
           <RequireAuth>
             <UpdateProduct />

@@ -17,7 +17,7 @@ const Home = () => {
     const [products, isLoading, refetch] = useProducts();
     // const [reviews, setReviews] = useState([]);
 
-    const { data: reviews } = useQuery('reviews', () => fetch('http://localhost:5000/reviews', {
+    const { data: reviews, reviewLoading } = useQuery('reviews', () => fetch('http://localhost:5000/reviews', {
         method: 'GET',
         headers: {
             'content-type': 'application/json',
@@ -25,7 +25,7 @@ const Home = () => {
         },
     }).then(res => res.json()))
 
-    if (isLoading || loading || products.length < 1) {
+    if (isLoading || loading || reviewLoading || products.length < 1) {
         return <Loading />
     }
 
@@ -35,8 +35,7 @@ const Home = () => {
 
     return (
         <div>
-            <div class="hero h-80" style={{ "background-image": `url(${bannerImage})` }
-            }>
+            <div class="hero h-80" style={{ "background-image": `url(${bannerImage})` }}>
                 <div class="hero-overlay bg-opacity-60"></div>
                 <div class="hero-content text-center text-neutral-content">
                     <div class="max-w-md">
@@ -48,7 +47,7 @@ const Home = () => {
             </div >
 
             <div>
-                <div className='md:flex my-5 gap-x-4 mx-auto justify-center'>
+                <div className='md:flex my-5 gap-x-4 mx-auto w-full justify-center'>
                     {
                         products.length > 0 && products?.slice(0, 6).map(product => <Product key={product._id} product={product}></Product>)
                     }
@@ -123,10 +122,23 @@ const Home = () => {
 
                 <div className='md:grid grid-cols-2 py-4 md:mx-32'>
                     {
-                        reviews.map(review => <ReviewCard key={review.id} review={review}></ReviewCard>)
+                        reviews && reviews.map(review => <ReviewCard key={review.id} review={review}></ReviewCard>)
                     }
                 </div>
 
+            </div>
+
+            <div className='my-10 text-left md:mx-20'>
+                <h3 className='text-3xl font-bold pb-2 mb-4 text-left text-primary border-b-4'>Our Vision</h3>
+                <div className='text-lg italic'>
+                    <p>
+                        <span className=' text-secondary font-bold'>Tool House</span> started it's journey before 5 years ago. We have started with a very small varieties of products. But, day by day, our customer increased and varieties of products increased as well. Now we are one of the biggest wholeseller in the country. We have <span className='text-secondary'>Awarded as the Best Tool making company</span>. This all happened because of the love of our consumers.
+                    </p>
+                    <p>
+                        We are commited to give the best service to our comsumers. They are our inspiration to go ahead. We have seen that our customer liked us so much. They give us valuable suggestion everyday to improve the quality of our service. We are following them accordingly. Also, we are taking our customers negative as our suggestion to improve ourselves.
+
+                    </p>
+                </div>
             </div>
 
         </div >

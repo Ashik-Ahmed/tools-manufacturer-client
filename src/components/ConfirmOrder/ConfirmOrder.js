@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import useSingleProduct from '../../hooks/useSingleProduct';
-import Loading from '../Shared/Loading';
 
 const ConfirmOrder = () => {
 
@@ -17,7 +16,7 @@ const ConfirmOrder = () => {
     //     return <Loading />
     // }
 
-
+    // order cancel functionality 
     const handleCancelOrder = () => {
         setProduct([]);
     }
@@ -28,7 +27,8 @@ const ConfirmOrder = () => {
 
     }
 
-
+    const navigate = useNavigate();
+    //order confirmation functinality
     const handleConfirmOrder = (event) => {
         event.preventDefault();
 
@@ -36,6 +36,8 @@ const ConfirmOrder = () => {
         const email = event.target.email.value || user?.email;
         const contactNumber = event.target.contact.value;
         const address = event.target.address.value;
+
+        //order details to store in DB
         const order = {
             productId: product._id,
             quantity: inputQuantity || 1,
@@ -45,10 +47,10 @@ const ConfirmOrder = () => {
             customerAddress: address
         }
 
+        //set updated product to update the quantity in DB
         const updatedProduct = {
             quantity: parseInt(product.quantity) - parseInt(inputQuantity)
         }
-        console.log(updatedProduct);
 
         if (!inputQuantity) {
             toast.warn('Please enter Quantity');
@@ -84,7 +86,10 @@ const ConfirmOrder = () => {
                         body: JSON.stringify(updatedProduct)
                     })
                         .then(res => res.json())
-                        .then(data => console.log('product updated : ', data))
+                        .then(data => {
+                            console.log('product updated : ', data);
+                            navigate('/dashboard/my-orders');
+                        })
 
                 })
 

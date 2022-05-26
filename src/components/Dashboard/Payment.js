@@ -10,31 +10,50 @@ const Payment = () => {
     const { orderId } = useParams();
     const [product, setProduct] = useState([]);
     const url = `http://localhost:5000/order/${orderId}`;
-    console.log(url)
+    // console.log(url)
 
     const { data: order, isLoading } = useQuery('tool', () => fetch(url).then(res => res.json()));
-    console.log('product Id: ', order.productId)
+    // console.log(order)
+    // console.log('product Id: ', order?.productId)
 
-    useEffect(() => {
-        if (order.productId) {
-            const productUrl = `http://localhost:5000/tools/${order?.productId}`;
-            console.log(productUrl)
-            fetch(productUrl, {
-                method: 'GET',
-                headers: {
-                    'content-type': 'application/json',
-                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
-                },
+
+    if (order?.productId) {
+        const productUrl = `http://localhost:5000/tools/${order?.productId}`;
+        // console.log(productUrl)
+        fetch(productUrl, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            },
+        })
+            .then(res => res.json())
+            .then(data => {
+                setProduct(data);
             })
-                .then(res => res.json())
-                .then(data => {
-                    setProduct(data);
-                })
-        }
-        else {
-            return <Loading />
-        }
-    }, [order])
+    }
+
+
+    // useEffect(() => {
+    //     if (order?.productId) {
+    //         const productUrl = `http://localhost:5000/tools/${order?.productId}`;
+    //         console.log(productUrl)
+    //         fetch(productUrl, {
+    //             method: 'GET',
+    //             headers: {
+    //                 'content-type': 'application/json',
+    //                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
+    //             },
+    //         })
+    //             .then(res => res.json())
+    //             .then(data => {
+    //                 setProduct(data);
+    //             })
+    //     }
+    //     else {
+    //         return <Loading />
+    //     }
+    // }, [order])
 
     // const productUrl = `http://localhost:5000/tools/${order?.productId}`;
     // console.log('product url: ', productUrl);
@@ -53,11 +72,11 @@ const Payment = () => {
     if (isLoading || !order.productId) {
         return <Loading />
     }
-    console.log(product);
+    // console.log(product);
     const stripePromise = loadStripe('pk_test_51L27hQBfaAM8tiFdMf9Wqlu7GMrnVRoWhcB3ExeKjfckg4c2ry7XMEVzVt7LcBa39D9k9bIdDgUY54cebVH3ngBN00iubBivaP');
 
     return (
-        <div class="hero min-h-screen bg-base-200">
+        <div class="hero  bg-base-200">
             <div class="hero-content w-full flex-col ">
                 <div class="text-center  max-w-md lg:text-left">
                     <h1 class="text-5xl font-bold">Please Pay!</h1>

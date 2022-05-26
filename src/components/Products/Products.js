@@ -12,7 +12,7 @@ const Products = () => {
     return (
         <div>
             <h2 className='text-3xl text-primary font-bold mb-8'>Please Choose your desired product</h2>
-            <div className='md:flex my-5 gap-x-4 mx-auto justify-center'>
+            <div className='md:grid grid-cols-6 md:mx-8 my-5 gap-4'>
                 {
                     products.map(product => <Product key={product._id} product={product}></Product>)
                 }
