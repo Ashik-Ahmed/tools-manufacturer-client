@@ -86,50 +86,42 @@ const Portfolio = () => {
 
                 <div className='md:grid grid-cols-3  gap-4 md:mt-4'>
                     <div className='rounded-lg text-center mx-auto shadow-xl bg-white'>
-                        <h2 class="card-title py-2">HTML5: Advanced</h2>
+                        <h2 class="card-title py-2 bg-red-400 rounded-t-lg px-1">HTML5: Advanced</h2>
                         <div class="card md:w-48 mx-auto px-3">
                             <figure><img className='' src={html} alt="Shoes" /></figure>
 
-                            {/* <div class="card-body">
-                        <h2 class="card-title">Shoes!</h2>
-                        <p>If a dog chews shoes whose shoes does he choose?</p>
-                        <div class="card-actions justify-end">
-                            <button class="btn btn-primary">Buy Now</button>
-                        </div>
-                    </div> */}
                         </div>
 
                     </div>
                     <div className='rounded-lg text-center mx-auto shadow-xl bg-white'>
-                        <h2 class="card-title py-2">CSS3: Advanced</h2>
+                        <h2 class="card-title py-2 bg-red-400 rounded-t-lg px-1">CSS3: Advanced</h2>
                         <div class="card md:w-48 mx-auto">
                             <figure><img className='' src={css} alt="Shoes" /></figure>
 
                         </div>
                     </div>
                     <div className='rounded-lg text-center mx-auto shadow-xl bg-white'>
-                        <h2 class="card-title py-2">JavaScript: Advanced</h2>
+                        <h2 class="card-title py-2 bg-red-400 rounded-t-lg px-1">JavaScript: Intermediate</h2>
                         <div class="card md:w-48 mx-auto">
                             <figure><img className='' src={JS} alt="Shoes" /></figure>
 
                         </div>
                     </div>
                     <div className='rounded-lg text-center mx-auto shadow-xl bg-white'>
-                        <h2 class="card-title py-2">ES6: Advanced</h2>
+                        <h2 class="card-title py-2 bg-red-400 rounded-t-lg px-1">ES6: Advanced</h2>
                         <div class="card md:w-48 mx-auto">
                             <figure><img className='' src={es6} alt="Shoes" /></figure>
 
                         </div>
                     </div>
                     <div className='rounded-lg text-center mx-auto shadow-xl bg-white'>
-                        <h2 class="card-title py-2">NodeJs: Advanced</h2>
+                        <h2 class="card-title py-2 bg-red-400 rounded-t-lg px-1">NodeJs: Basic</h2>
                         <div class="card md:w-48 mx-auto">
                             <figure><img className='' src={node} alt="Shoes" /></figure>
-
                         </div>
                     </div>
                     <div className='rounded-lg text-center mx-auto shadow-xl bg-white'>
-                        <h2 class="card-title py-2">MongoDB: Advanced</h2>
+                        <h2 class="card-title py-2 bg-red-400 rounded-t-lg px-1">MongoDB: Advanced</h2>
                         <div class="card md:w-40 mx-auto">
                             <figure><img className='' src={mongo} alt="Shoes" /></figure>
 

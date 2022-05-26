@@ -71,7 +71,7 @@ const Home = () => {
                 <div className='md:flex gap-4 justify-center'>
                     {
                         products.map(product => {
-                            if (product.quantity < 10) {
+                            if (product.quantity < 20) {
                                 return <Product key={product._id} product={product}></Product>
 
                             }

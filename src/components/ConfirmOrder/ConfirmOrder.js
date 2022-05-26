@@ -100,7 +100,7 @@ const ConfirmOrder = () => {
 
     return (
         <div className='h-screen'>
-            <h2>Please confirm your order</h2>
+            <h2 className='text-4xl font-bold text-primary mb-6'>Please confirm your order</h2>
 
             {
                 !product.name ?
@@ -111,7 +111,7 @@ const ConfirmOrder = () => {
 
                     <div>
                         <div class="overflow-x-auto w-full">
-                            <table class="table w-full">
+                            <table class="table md:w-3/4 mx-auto">
                                 <thead>
                                     <tr>
                                         <th>Photo</th>
@@ -155,7 +155,7 @@ const ConfirmOrder = () => {
 
 
                         <div class="card bg-base-100 mx-auto px-8 py-5 w-3/4 shadow-xl">
-                            <h2>Shipping Information</h2>
+                            <h2 className='text-xl font-bold text-primary'>Shipping Information</h2>
                             <form onSubmit={handleConfirmOrder}>
                                 <div className='md:flex gap-x-4 justify-center'>
                                     <div class="form-control w-full max-w-xs">

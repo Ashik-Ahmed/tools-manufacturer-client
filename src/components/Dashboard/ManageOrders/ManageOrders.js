@@ -53,7 +53,7 @@ const ManageOrders = () => {
 
     return (
         <div>
-            <h2>manage All Orders</h2>
+            <h2 className='text-3xl font-bold text-primary mt-4'>Manage All Orders</h2>
             <div class=" m-6">
                 <table class="table  max-w-md ">
                     <thead>
