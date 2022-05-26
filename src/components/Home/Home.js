@@ -42,7 +42,7 @@ const Home = () => {
                     <div class="max-w-md">
                         <h1 class="mb-5 text-5xl font-bold">Welcome</h1>
                         <p class="mb-5">Number 1 tools wholeseller in the country</p>
-                        <button class="btn btn-primary">Get Started</button>
+                        <button class="btn btn-primary">Start Buying</button>
                     </div>
                 </div>
             </div >
@@ -56,7 +56,7 @@ const Home = () => {
                 {dbUser.role !== 'admin' && <Link to='/all-products' className='btn btn-secondary'>See All Products</Link>}
             </div>
 
-            <div className='text-3xl font-bold text-primary text-left md:mx-12'>
+            <div className='text-3xl font-bold text-primary text-left md:mx-12 mt-8'>
                 <div className=' pb-3 border-b-4 mb-6'>{dbUser?.role === 'admin' ?
 
                     <p>Products Need to Restock</p>

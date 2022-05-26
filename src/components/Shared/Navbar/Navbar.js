@@ -45,7 +45,7 @@ const Navbar = () => {
 
                     </ul>
                 </div>
-                <a class="btn btn-ghost normal-case text-xl">App Name</a>
+                <a href='/' class="btn btn-ghost normal-case text-xl">Tool House</a>
             </div>
             <div class="navbar-center hidden lg:flex">
                 <ul class="menu menu-horizontal p-0">

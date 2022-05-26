@@ -11,8 +11,6 @@ const OrderRow = ({ tool, handleCancelOrder }) => {
         return <Loading />
     }
 
-    console.log(product);
-
     return (
         <tr>
             <td>
@@ -35,7 +33,7 @@ const OrderRow = ({ tool, handleCancelOrder }) => {
             </td>
             <td>{tool.quantity}</td>
             <td>{tool.quantity * product.price}</td>
-            <td>Pending</td>
+            <td>{tool.status ? <p className='text-green-500 font-bold'>Shipped</p> : <p className='text-red-500 font-bold'>Pending</p>}</td>
             <th className='flex-col gap-x-2'>
                 {!tool.paid && <button onClick={() => handleCancelOrder(tool._id)} class="btn bg-red-800 btn-xs">Cancel</button>}
 

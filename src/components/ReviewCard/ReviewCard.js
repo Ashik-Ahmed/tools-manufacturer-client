@@ -11,7 +11,7 @@ const ReviewCard = (props) => {
     }
 
     return (
-        <div className='text-left bg-violet-400 rounded-lg shadow-xl text-gray-100 mx-auto  md:mx-6 mt-4'>
+        <div className='text-left bg-green-500 rounded-lg shadow-xl text-gray-100 mx-auto  md:mx-6 mt-4'>
             <div className='flex justify-between items-center gap-4 mb-2 p-3 border-b-4'>
                 {/* <img className='w-8 h-8 rounded-full' src={img} alt="" /> */}
                 <h4 className='font-semibold'>{name}</h4>

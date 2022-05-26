@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom';
 import useSingleProduct from '../../../hooks/useSingleProduct';
 import Loading from '../../Shared/Loading';
 
-const OrderRow = ({ order, setModal }) => {
+const OrderRow = ({ order, setModal, handleShipment }) => {
 
     const [product] = useSingleProduct(order.productId);
 
-    console.log(product);
     if (!product.photo) {
         return <Loading />
     }
@@ -46,9 +45,21 @@ const OrderRow = ({ order, setModal }) => {
             </td>
             <th>
 
-                {order.paid && <Link to={`/inventory/${product._id}`} class="btn bg-green-600 btn-sm">Make Shipment</Link>}
+                {order.paid
+                    ?
+                    <div>
+                        {
+                            order.status === 'approved' ?
+                                <p>Shipped</p>
+                                :
+                                <button onClick={() => handleShipment(order._id)} class="btn bg-green-600 btn-sm">Make Shipment</button>
+                        }
+                    </div>
+                    :
+                    <label onClick={() => setModal(order)} for="order-delete-modal" class="btn bg-red-600 btn-sm ml-3">Delete</label>
+                }
 
-                {!order.paid && <label onClick={() => setModal(product)} for="my-modal-6" class="btn bg-red-600 btn-sm ml-3">Delete</label>}
+                { }
             </th>
         </tr >
     );
