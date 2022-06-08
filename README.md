@@ -2,9 +2,9 @@
 
 This project is live at this link [Live site](https://tool-house-3896b.web.app/dashboard ).
 
-###Admin Access:
-User: admin@user.com
-Pass: SuperAdmin@876
+### Admin Access:
+* User: admin@user.com
+* Pass: SuperAdmin@876
 
 ## Available Features:
 
